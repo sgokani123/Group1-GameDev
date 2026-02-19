@@ -1,3 +1,10 @@
 **.env
 **/dist
 **/build
+
+# Large files
+*.zip
+EscapeSchool/Library/
+EscapeSchool/Logs/
+EscapeSchool/.vs/
+EscapeSchool/obj/
