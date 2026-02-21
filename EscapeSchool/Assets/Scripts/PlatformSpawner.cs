@@ -7,15 +7,22 @@ public class PlatformSpawner : MonoBehaviour
     public GameObject platformPrefab;
 
     [Header("Spawn Settings")]
-    public float minX           = -2.5f;
-    public float maxX           =  2.5f;
-    public float minYGap        =  1.0f;   // Minimum vertical gap
-    public float maxYGap        =  1.6f;   // Maximum vertical gap — keep reachable
-    public int   initialCount   =  12;
-    public float spawnLookAhead =  8f;
+    public float minX = -2.5f;
+    public float maxX =  2.5f;
+    public float minYGap = 1.0f;
+    public float maxYGap = 1.6f;
+    public int initialCount = 12;
+    public float spawnLookAhead = 8f;
 
     [Header("Difficulty")]
-    public float difficultyScaleEvery = 30f; // Units climbed before gaps increase
+    public float difficultyHeight = 300f;   // height where difficulty ~ max
+    public float extraGapAtMax = 0.9f;      // extra vertical gap at max difficulty
+    public float maxTotalGap = 2.3f;        // hard cap for reachability
+
+    [Header("Horizontal Difficulty")]
+    public float extraXSpreadAtMax = 1.2f;  // how much wider we allow (in world units) at max
+    public float farJumpChanceAtMax = 0.55f;// chance to bias platforms toward edges at max
+    public float farJumpEdgeMin = 0.70f;    // edge bias strength (0.7 => between 70%-100% of xRange)
 
     [Header("Pooling")]
     public int prewarmPoolCount = 30;
@@ -23,15 +30,15 @@ public class PlatformSpawner : MonoBehaviour
     private ObjectPool pool;
 
     private float highestSpawnedY;
-    private List<GameObject> activePlatforms = new List<GameObject>();
+    private float lastX;
+    private readonly List<GameObject> activePlatforms = new List<GameObject>();
     private Camera mainCam;
-    private bool lastWasUnreliable = false; // Tracks if last platform was broken/disposable
+    private bool lastWasUnreliable = false;
 
     void Start()
     {
         mainCam = Camera.main;
 
-        // Initialize pooling
         pool = gameObject.AddComponent<ObjectPool>();
         pool.Init(platformPrefab, prewarmPoolCount, pooledParent);
 
@@ -40,7 +47,6 @@ public class PlatformSpawner : MonoBehaviour
 
     void Update()
     {
-        // Try to recover mainCam if it's null (handles rare scene reload cases)
         if (mainCam == null) mainCam = Camera.main;
         if (mainCam == null) return;
 
@@ -64,22 +70,47 @@ public class PlatformSpawner : MonoBehaviour
         });
     }
 
+    float Difficulty01(float height)
+    {
+        return Mathf.Clamp01(height / Mathf.Max(1f, difficultyHeight));
+    }
+
     float CalculateGap(float height)
     {
-        // Increase gap gradually with height, but cap it so platforms stay reachable
-        float scale = Mathf.Floor(height / difficultyScaleEvery) * 0.1f;
-        return Mathf.Clamp(Random.Range(minYGap, maxYGap) + scale, minYGap, maxYGap);
+        float d = Difficulty01(height);
+
+        float baseGap = Random.Range(minYGap, maxYGap);
+        float extra = Mathf.Lerp(0f, extraGapAtMax, d);
+
+        float gap = baseGap + extra;
+        return Mathf.Clamp(gap, minYGap, maxTotalGap);
+    }
+
+    float CurrentXRange(float height)
+    {
+        float d = Difficulty01(height);
+
+        // Wider horizontal range over time
+        float baseRange = maxX;
+        float extraRange = Mathf.Lerp(0f, extraXSpreadAtMax, d);
+        float range = baseRange + extraRange;
+
+        // Never exceed camera bounds (safe clamp)
+        float camHalfWidth = mainCam != null ? mainCam.orthographicSize * mainCam.aspect : range;
+        return Mathf.Min(range, camHalfWidth - 0.2f);
     }
 
     void SpawnInitialPlatforms(float startY = -0.5f)
     {
-        // Always place a safe platform directly under the player
         GameObject first = pool.Get();
         first.transform.position = new Vector3(0f, startY - 0.3f, 0f);
         first.transform.rotation = Quaternion.identity;
-        SetTileType(first, 0);
+
+        SetTileType(first, 0, 0f); // safe start
         activePlatforms.Add(first);
+
         highestSpawnedY = startY - 0.3f;
+        lastX = 0f;
 
         for (int i = 0; i < initialCount; i++)
         {
@@ -90,12 +121,17 @@ public class PlatformSpawner : MonoBehaviour
 
     void SpawnPlatform(float y)
     {
-        int type = GetRandomTileType(y);
+        // 1. Determine the difficulty factor (0 to 1) based on height
+        float d = Difficulty01(y);
+        
+        // 2. Determine Tile Type based on probability weights
+        int type = GetRandomTileType(y, d);
 
-        // If last platform was unreliable (broken/disposable), force a normal one now
+        // 3. Prevent "Impossible" gaps: 
+        // If the last platform was broken (1) or disposable (2), force this one to be solid (0).
         if (lastWasUnreliable)
         {
-            type = 0;
+            type = 0; 
             lastWasUnreliable = false;
         }
         else
@@ -103,38 +139,84 @@ public class PlatformSpawner : MonoBehaviour
             lastWasUnreliable = (type == 1 || type == 2);
         }
 
-        // Limit X spread based on gap size so platforms are always reachable
-        float gap = y - highestSpawnedY;
-        float xRange = Mathf.Lerp(maxX, maxX * 0.5f, gap / maxYGap);
+        // 4. Calculate Horizontal Range (clamped by camera bounds)
+        float xRange = CurrentXRange(y);
+
+        // 5. Calculate X Position
+        // Start with a completely random value within the allowed range
         float x = Random.Range(-xRange, xRange);
 
+        // Later in the game: occasionally force platforms toward the edges
+        // This creates those wide, satisfying lateral jumps.
+        float farChance = Mathf.Lerp(0.10f, farJumpChanceAtMax, d);
+        if (Random.value < farChance)
+        {
+            float edgeMin = Mathf.Clamp01(farJumpEdgeMin);
+            float edgeX = Random.Range(edgeMin * xRange, xRange);
+            x = (Random.value < 0.5f ? -edgeX : edgeX);
+        }
+
+        // 6. Apply "Repel" logic
+        // As difficulty rises, bias the platform AWAY from the last platform's X
+        // This prevents "ladders" where the player just holds still to climb.
+        float repel = Mathf.Lerp(0.0f, 0.35f, d);
+        float diff = x - lastX;
+        // If they are exactly the same, pick a random direction to push
+        float side = (diff == 0) ? (Random.value > 0.5f ? 1 : -1) : Mathf.Sign(diff);
+        
+        x = Mathf.Lerp(x, x + side * xRange * 0.25f, repel);
+        
+        // Safety clamp to ensure the repel didn't push it off-screen
+        x = Mathf.Clamp(x, -xRange, xRange);
+
+        // 7. Object Pooling: Get the platform and set it up
         GameObject p = pool.Get();
         p.transform.position = new Vector3(x, y, 0f);
         p.transform.rotation = Quaternion.identity;
-        SetTileType(p, type);
+
+        // 8. Initialize the Tile component
+        SetTileType(p, type, d);
+
+        // 9. Tracking for the next spawn
         activePlatforms.Add(p);
         highestSpawnedY = y;
+        lastX = x;
     }
 
-    void SetTileType(GameObject p, int type)
+    void SetTileType(GameObject p, int type, float difficulty01)
     {
         Tile tile = p.GetComponent<Tile>();
-        if (tile != null) tile.ApplyType(type);
+        if (tile != null) tile.ApplyType(type, difficulty01);
     }
 
-    int GetRandomTileType(float height)
+    int GetRandomTileType(float height, float d)
     {
-        float difficulty = Mathf.Clamp01(height / 150f);
-        int r = Random.Range(0, 100);
+        // Early: mostly normal. Later: more moving + broken/disposable.
+        int normalW     = Mathf.RoundToInt(Mathf.Lerp(78, 40, d));
+        int movingW     = Mathf.RoundToInt(Mathf.Lerp(10, 26, d)); // split later
+        int brokenW     = Mathf.RoundToInt(Mathf.Lerp(6,  18, d));
+        int disposableW = Mathf.RoundToInt(Mathf.Lerp(4,  16, d));
+        int springW     = Mathf.RoundToInt(Mathf.Lerp(2,   6, d));
 
-        int normalChance = (int)Mathf.Lerp(75, 50, difficulty);
+        int total = normalW + movingW + brokenW + disposableW + springW;
+        int r = Random.Range(0, total);
 
-        if (r < normalChance)       return 0; // Normal
-        if (r < normalChance + 10)  return 4; // Horizontal moving
-        if (r < normalChance + 18)  return 1; // Broken
-        if (r < normalChance + 23)  return 2; // Disposable
-        if (r < normalChance + 27)  return 5; // Vertical moving
-        return 3;                             // Spring
+        if (r < normalW) return 0;
+
+        r -= normalW;
+        if (r < movingW)
+        {
+            // later: more vertical movers (harder)
+            return (Random.value < Mathf.Lerp(0.7f, 0.45f, d)) ? 4 : 5;
+        }
+
+        r -= movingW;
+        if (r < brokenW) return 1;
+
+        r -= brokenW;
+        if (r < disposableW) return 2;
+
+        return 3;
     }
 
     public void ResetSpawner(float startY = -0.5f)
@@ -147,9 +229,12 @@ public class PlatformSpawner : MonoBehaviour
 
         foreach (var p in activePlatforms)
             if (p != null) pool.Return(p);
+
         activePlatforms.Clear();
         highestSpawnedY = startY - 0.5f;
         lastWasUnreliable = false;
+        lastX = 0f;
+
         SpawnInitialPlatforms(startY);
     }
 }
