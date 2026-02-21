@@ -1,10 +1,75 @@
+######################################
+# Environment
+######################################
 **.env
+
+######################################
+# Node / Web
+######################################
 **/dist
 **/build
 
+######################################
 # Large files
+######################################
 *.zip
+*.unitypackage
+*.apk
+*.aab
+*.ipa
+
+######################################
+# Unity (EscapeSchool project)
+######################################
 EscapeSchool/Library/
+EscapeSchool/Temp/
 EscapeSchool/Logs/
-EscapeSchool/.vs/
+EscapeSchool/UserSettings/
+EscapeSchool/MemoryCaptures/
 EscapeSchool/obj/
+EscapeSchool/Build/
+EscapeSchool/Builds/
+EscapeSchool/Assets/_Recovery/
+
+######################################
+# IDE / Editor
+######################################
+EscapeSchool/.vs/
+EscapeSchool/.idea/
+EscapeSchool/.vscode/
+EscapeSchool/.vsconfig
+
+######################################
+# Visual Studio / Rider generated
+######################################
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+######################################
+# OS junk
+######################################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+######################################
+# Safety (if Unity opened at repo root by mistake)
+######################################
+Library/
+Temp/
+Logs/
+UserSettings/
+obj/
