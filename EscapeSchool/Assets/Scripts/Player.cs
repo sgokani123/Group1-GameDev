@@ -15,10 +15,21 @@ public class Player : MonoBehaviour
     private Camera mainCam;
     private bool isDead = false;
 
+    // Added field to carry horizontal input from Update() to FixedUpdate()
+    private float moveX;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCam = Camera.main;
+        RefreshBorders();
+    }
+
+    // Ensure references are valid when the component is enabled (prevents NRE when toggled)
+    void OnEnable()
+    {
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (mainCam == null) mainCam = Camera.main;
         RefreshBorders();
     }
 
@@ -37,6 +48,10 @@ public class Player : MonoBehaviour
         if (isDead) return;
         if (Keyboard.current == null) return;
 
+        // Ensure mainCam is available for the death check and wrapping calculations
+        if (mainCam == null) mainCam = Camera.main;
+        if (mainCam == null) return;
+
         Vector3 acc = Vector3.zero;
 
         if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
@@ -50,8 +65,8 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        // Apply horizontal movement directly
-        rb.linearVelocity = new Vector2(acc.x * moveSpeed, rb.linearVelocity.y);
+        // Store horizontal input for FixedUpdate physics write
+        moveX = acc.x;
 
         // Screen-edge wrapping
         Vector3 pos = transform.position;
@@ -69,10 +84,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    // FixedUpdate: physics writes happen here for stability
+    void FixedUpdate()
+    {
+        if (isDead || rb == null) return;
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDead) return;
-        if (collision.CompareTag("Platform"))
+        if (collision.CompareTag("Platform") && rb.linearVelocity.y <= 0f)
         {
             Jump(1f);
         }
