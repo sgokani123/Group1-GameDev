@@ -100,6 +100,10 @@ public class GameManager : MonoBehaviour
         if (State == GameState.GameOver) return;
         State = GameState.GameOver;
 
+        // Ensure we capture any last-frame height (player may have triggered GameOver before GameManager.Update)
+        float height = player.transform.position.y - playerStartPosition.y;
+        if (height > score) score = height;
+
         // Save high score
         int finalScoreInt = Mathf.FloorToInt(score * 10);
         if (score > highScore)

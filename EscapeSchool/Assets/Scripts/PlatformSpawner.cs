@@ -30,6 +30,8 @@ public class PlatformSpawner : MonoBehaviour
 
     void Update()
     {
+        // Try to recover Camera.main if it was temporarily missing
+        if (mainCam == null) mainCam = Camera.main;
         if (mainCam == null) return;
 
         float camTopY    = mainCam.transform.position.y + mainCam.orthographicSize;
