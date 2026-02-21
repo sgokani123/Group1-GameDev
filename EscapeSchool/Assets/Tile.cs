@@ -13,17 +13,55 @@ public class Tile : MonoBehaviour
     private Vector3 startPos;
     private int direction = 1;    // 1 is up, -1 is down
 
+    // Add these fields near the top
+    private Rigidbody2D rb;
+    private Collider2D col;
+
+    // Cache components for pool-safe reuse
+    private void Awake()
+    {
+        sp  = GetComponent<SpriteRenderer>();
+        rb  = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+    }
+
+    // First-time init (pool reuse won't call Start again)
     private void Start()
     {
-        // Init location
-        startPos = transform.position;
-        sp = GetComponent<SpriteRenderer>();
+        // First-time init (pool reuse won't call Start again)
+        ApplyType(tileType);
+    }
 
-        // image
-        if (sprites != null && tileType < sprites.Length)
+    // Called every time the spawner reuses this platform
+    public void ApplyType(int newType)
+    {
+        tileType = newType;
+
+        // Reset baseline for movement
+        startPos = transform.position;
+        direction = 1;
+
+        // Reset physics (broken/disposable may have made it Dynamic)
+        if (rb != null)
         {
-            sp.sprite = sprites[tileType];
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.gravityScale = 0f;
+
+            // pick what your prefab normally is:
+            // rb.bodyType = RigidbodyType2D.Static;
+            rb.bodyType = RigidbodyType2D.Kinematic;
         }
+
+        // Ensure collider enabled
+        if (col != null) col.enabled = true;
+
+        // Update sprite for this type
+        if (sp != null && sprites != null && tileType >= 0 && tileType < sprites.Length)
+            sp.sprite = sprites[tileType];
+
+        // Ensure object active when reused
+        gameObject.SetActive(true);
     }
 
     private void Update()
@@ -89,7 +127,8 @@ public class Tile : MonoBehaviour
                         rb1.bodyType = RigidbodyType2D.Dynamic;
                         rb1.gravityScale = 1;
                     }
-                    Destroy(gameObject, 2f);
+                    // Pool-safe: disable instead of destroying
+                    gameObject.SetActive(false);
                     break;
 
                 case 2: // one time platfrom
@@ -112,5 +151,5 @@ public class Tile : MonoBehaviour
             }
         }
     }
-} 
+}
 

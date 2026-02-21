@@ -2294,6 +2294,8 @@ MonoBehaviour:
   initialCount: 12
   spawnLookAhead: 8
   difficultyScaleEvery: 30
+  prewarmPoolCount: 20
+  pooledParent: {fileID: 0}
 --- !u!4 &1721212824
 Transform:
   m_ObjectHideFlags: 0
