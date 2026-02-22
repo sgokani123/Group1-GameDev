@@ -18,6 +18,15 @@ public class Player : MonoBehaviour
     // Added field to carry horizontal input from Update() to FixedUpdate()
     private float moveX;
 
+    [Header("Physics Polish")]
+    public float lerpSpeed = 10f; // Adjust for "snappiness"
+
+
+    // Hard floor — set by GameManager to platform_0's Y so the player can never fall through it.
+    private float floorY = float.MinValue;
+
+    public void SetFloorY(float y) { floorY = y; }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -85,19 +94,24 @@ public class Player : MonoBehaviour
     }
 
     // FixedUpdate: physics writes happen here for stability
+    
     void FixedUpdate()
     {
         if (isDead || rb == null) return;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isDead) return;
-        if (collision.CompareTag("Platform") && rb.linearVelocity.y <= 0f)
+        // Hard floor: if the player reaches platform_0's Y, bounce them back up.
+        // This is a guaranteed safety net regardless of trigger/collision state.
+        if (rb.position.y <= floorY && rb.linearVelocity.y <= 0f)
         {
+            rb.position = new Vector2(rb.position.x, floorY);
             Jump(1f);
         }
+
+        float targetXVelocity = moveX * moveSpeed;
+        // Smoothly transition to the target velocity instead of snapping
+        float newX = Mathf.Lerp(rb.linearVelocity.x, targetXVelocity, Time.fixedDeltaTime * lerpSpeed);
+        
+        rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
     }
 
     public void Jump(float multiplier)
@@ -121,7 +135,6 @@ public class Player : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.zero;
         RefreshBorders();
-        // Give initial jump so player immediately lands on a platform
         Jump(1f);
     }
 }
