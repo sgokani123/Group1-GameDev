@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
     public float lerpSpeed = 10f; // Adjust for "snappiness"
 
 
+    // Hard floor — set by GameManager to platform_0's Y so the player can never fall through it.
+    private float floorY = float.MinValue;
+
+    public void SetFloorY(float y) { floorY = y; }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -93,7 +98,15 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         if (isDead || rb == null) return;
-        
+
+        // Hard floor: if the player reaches platform_0's Y, bounce them back up.
+        // This is a guaranteed safety net regardless of trigger/collision state.
+        if (rb.position.y <= floorY && rb.linearVelocity.y <= 0f)
+        {
+            rb.position = new Vector2(rb.position.x, floorY);
+            Jump(1f);
+        }
+
         float targetXVelocity = moveX * moveSpeed;
         // Smoothly transition to the target velocity instead of snapping
         float newX = Mathf.Lerp(rb.linearVelocity.x, targetXVelocity, Time.fixedDeltaTime * lerpSpeed);
@@ -122,7 +135,6 @@ public class Player : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.zero;
         RefreshBorders();
-        // Give initial jump so player immediately lands on a platform
         Jump(1f);
     }
 }

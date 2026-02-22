@@ -90,34 +90,33 @@ public class Tile : MonoBehaviour
         var player = collision.GetComponent<Player>();
         var playerRb = collision.GetComponent<Rigidbody2D>();
         if (player == null || playerRb == null) return;
+        if (!collision.CompareTag("Player")) return;
+        if (playerRb.linearVelocity.y > 0.1f) return; // only trigger when falling
 
-        if (collision.CompareTag("Player") && playerRb.linearVelocity.y <= 0.1f)
+        switch (tileType)
         {
-            switch (tileType)
-            {
-                case 0:
-                case 4:
-                case 5:
-                    player.Jump(1f);
-                    break;
+            case 0:
+            case 4:
+            case 5:
+                player.Jump(1f);
+                break;
 
-                case 1: // broken
-                    ConsumeAndFall();
-                    break;
+            case 1: // broken
+                ConsumeAndFall();
+                break;
 
-                case 2: // disposable (one-time)
-                    player.Jump(1f);
-                    ConsumeAndFall();
-                    break;
+            case 2: // disposable (one-time)
+                player.Jump(1f);
+                ConsumeAndFall();
+                break;
 
-                case 3: // spring
-                    player.Jump(1.5f);
-                    break;
+            case 3: // spring
+                player.Jump(1.5f);
+                break;
 
-                default:
-                    player.Jump(1f);
-                    break;
-            }
+            default:
+                player.Jump(1f);
+                break;
         }
     }
 

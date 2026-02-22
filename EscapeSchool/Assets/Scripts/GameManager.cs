@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour
         // Reset camera
         cameraFollow.ResetCamera(playerStartPosition.y);
 
+        // Set the hard floor at platform_0's Y so the player can never fall through it.
+        // platform_0 is always spawned at playerStartPosition.y - 0.3f (see PlatformSpawner).
+        player.SetFloorY(playerStartPosition.y - 0.3f);
+
         // Reset player position and give initial jump
         player.ResetPlayer(playerStartPosition);
 
