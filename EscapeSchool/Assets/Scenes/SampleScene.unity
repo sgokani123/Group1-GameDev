@@ -638,7 +638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.9, y: 149.6}
+  m_AnchoredPosition: {x: 0.0000061989, y: 194.8}
   m_SizeDelta: {x: 77.6365, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300649464
@@ -1365,6 +1365,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 12
   buffer: 0.6
+  lerpSpeed: 10
 --- !u!1 &902010741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,7 +2294,12 @@ MonoBehaviour:
   maxYGap: 1.6
   initialCount: 12
   spawnLookAhead: 8
-  difficultyScaleEvery: 30
+  difficultyHeight: 300
+  extraGapAtMax: 0.9
+  maxTotalGap: 2.3
+  extraXSpreadAtMax: 1.2
+  farJumpChanceAtMax: 0.55
+  farJumpEdgeMin: 0.7
   prewarmPoolCount: 20
   pooledParent: {fileID: 0}
 --- !u!4 &1721212824
