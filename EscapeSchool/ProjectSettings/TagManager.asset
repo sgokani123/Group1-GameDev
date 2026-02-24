@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platdorm
   - Platform
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,13 @@ public class PlatformSpawner : MonoBehaviour
     [Header("Platform Prefab")]
     public GameObject platformPrefab;
 
+    // enemy create
+    [Header("Monster Spawn Settings")]
+    public GameObject enemyPrefab;      // Inspector enemy
+    [Range(0, 1)]
+    public float enemySpawnChance = 0.15f; //probabillity
+ 
+
     [Header("Spawn Settings")]
     public float minX = -2.5f;
     public float maxX =  2.5f;
@@ -63,6 +70,10 @@ public class PlatformSpawner : MonoBehaviour
         {
             if (p != null && p.transform.position.y < camBottomY - 3f)
             {
+                //delet enemy
+                ClearEnemiesOnPlatform(p);
+                
+
                 pool.Return(p);
                 return true;
             }
@@ -98,6 +109,19 @@ public class PlatformSpawner : MonoBehaviour
         // Never exceed camera bounds (safe clamp)
         float camHalfWidth = mainCam != null ? mainCam.orthographicSize * mainCam.aspect : range;
         return Mathf.Min(range, camHalfWidth - 0.2f);
+    }
+
+    //delete enemy
+    void ClearEnemiesOnPlatform(GameObject platform)
+    {
+        //find the platform enemy and than delete
+        foreach (Transform child in platform.transform)
+        {
+            if (child.CompareTag("Enemy"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 
     void SpawnInitialPlatforms(float startY = -0.5f)
@@ -177,10 +201,30 @@ public class PlatformSpawner : MonoBehaviour
         // 8. Initialize the Tile component
         SetTileType(p, type, d);
 
+        //decide enmey create
+        if ((type == 0 || type == 4 || type == 5) && Random.value < enemySpawnChance)
+        {
+            SpawnEnemy(p);
+        }
+
+
         // 9. Tracking for the next spawn
         activePlatforms.Add(p);
         highestSpawnedY = y;
         lastX = x;
+    }
+
+    //enemy create
+    void SpawnEnemy(GameObject platform)
+    {
+        if (enemyPrefab == null) return;
+
+        //create
+        Vector3 enemyPos = platform.transform.position + new Vector3(0, 0.6f, 0);
+        GameObject enemy = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
+
+        //enemy is platform
+        enemy.transform.SetParent(platform.transform);
     }
 
     void SetTileType(GameObject p, int type, float difficulty01)
@@ -228,7 +272,15 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         foreach (var p in activePlatforms)
-            if (p != null) pool.Return(p);
+        {
+            if (p != null)
+            {
+                //reset enemy
+                ClearEnemiesOnPlatform(p);
+
+                pool.Return(p);
+            }
+        }
 
         activePlatforms.Clear();
         highestSpawnedY = startY - 0.5f;
