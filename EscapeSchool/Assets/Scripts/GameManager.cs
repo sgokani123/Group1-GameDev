@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 /// <summary>
@@ -11,14 +11,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // ─── State ───────────────────────────────────────────────
-    public enum GameState { Menu, Playing, GameOver }
+    public enum GameState { Menu, Playing, Paused, GameOver, Options, Scores, Store }
     public GameState State { get; private set; } = GameState.Menu;
 
     // ─── UI Panels ────────────────────────────────────────────
     [Header("UI Panels")]
     public GameObject menuPanel;        // Main menu panel
     public GameObject hudPanel;         // In-game HUD panel
+    public GameObject pausePanel;       // Pause overlay panel
     public GameObject gameOverPanel;    // Game over panel
+    public GameObject optionsPanel;     // Options page
+    public GameObject scoresPanel;      // Scores/leaderboard page
+    public GameObject storePanel;       // Store page
 
     // ─── HUD Text ─────────────────────────────────────────────
     [Header("HUD")]
@@ -30,8 +34,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI highScoreText;   // All-time best
 
     // ─── Main Menu Text ───────────────────────────────────────
-    [Header("Main Menu")]
-    public TextMeshProUGUI menuHighScoreText; // Best score shown on menu (optional)
+    [Header("Menu / Scores")]
+    public TextMeshProUGUI menuHighScoreText;    // Best score shown on menu (optional)
+    public TextMeshProUGUI scoresHighScoreText;  // Best score shown on scores page (optional)
 
     // ─── Scene References ─────────────────────────────────────
     [Header("References")]
@@ -41,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     // ─── Private ──────────────────────────────────────────────
     [Header("Start Position")]
-    public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f); // Set this just above platform_0 in the Inspector
+    public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f); // Set just above platform_0 in Inspector
     private float score;
     private float highScore;
 
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour
         else { Destroy(gameObject); return; }
 
         highScore = PlayerPrefs.GetFloat("HighScore", 0f);
+        Time.timeScale = 1f;
     }
 
     void Start()
@@ -61,6 +67,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        HandlePauseHotkey();
+            
         if (State != GameState.Playing) return;
 
         // Score = units climbed above start position × 10
@@ -68,34 +76,39 @@ public class GameManager : MonoBehaviour
         if (height > score) score = height;
 
         if (scoreText != null)
-            scoreText.text = "Score: " + Mathf.FloorToInt(score * 10);
+            scoreText.text = "SCORE: " + Mathf.FloorToInt(score * 10);
     }
 
-    // ─── Public Buttons ──────────────────────────────────────
-    
+    // ─── Main Menu Buttons ───────────────────────────────────
+
     /// Called by the "Play" button on the main menu
     public void StartGame()
     {
         score = 0f;
         State = GameState.Playing;
+        Time.timeScale = 1f;
 
         // Activate player first so its Awake/Start can run
-        player.gameObject.SetActive(true);
+        if (player != null) player.gameObject.SetActive(true);
 
         // Reset platforms starting from just below the player start
-        platformSpawner.ResetSpawner(playerStartPosition.y);
+        if (platformSpawner != null)
+            platformSpawner.ResetSpawner(playerStartPosition.y);
 
         // Reset camera
-        cameraFollow.ResetCamera(playerStartPosition.y);
+        if (cameraFollow != null)
+            cameraFollow.ResetCamera(playerStartPosition.y);
 
         // Set the hard floor at platform_0's Y so the player can never fall through it.
         // platform_0 is always spawned at playerStartPosition.y - 0.3f (see PlatformSpawner).
-        player.SetFloorY(playerStartPosition.y - 0.3f);
+        if (player != null)
+            player.SetFloorY(playerStartPosition.y - 0.3f);
 
         // Reset player position and give initial jump
-        player.ResetPlayer(playerStartPosition);
+        if (player != null)
+            player.ResetPlayer(playerStartPosition);
 
-        SetPanels(hud: true, menu: false, gameOver: false);
+        SetPanels(menu: false, hud: true, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
 
     /// Called by Player when it falls off the bottom of the screen
@@ -103,9 +116,10 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.GameOver) return;
         State = GameState.GameOver;
+        Time.timeScale = 1f;
 
-        // Ensure we capture any last-frame height (player may have triggered GameOver before GameManager.Update)
-        float height = player.transform.position.y - playerStartPosition.y;
+        // Capture any last-frame height
+        float height = (player != null ? player.transform.position.y : playerStartPosition.y) - playerStartPosition.y;
         if (height > score) score = height;
 
         // Save high score
@@ -118,12 +132,12 @@ public class GameManager : MonoBehaviour
         }
         int highScoreInt = Mathf.FloorToInt(highScore * 10);
 
-        if (finalScoreText  != null) finalScoreText.text  = "Score: "  + finalScoreInt;
-        if (highScoreText   != null) highScoreText.text   = "Best: "   + highScoreInt;
+        if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
+        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + highScoreInt;
 
-        SetPanels(hud: false, menu: false, gameOver: true);
+        SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
-        player.gameObject.SetActive(false);
+        if (player != null) player.gameObject.SetActive(false);
     }
 
     /// Called by the "Retry" button on the game over screen
@@ -132,27 +146,98 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
-    /// Called by the "Main Menu" button on the game over screen
+    /// Called by "Menu" buttons to return to the main menu
     public void ShowMenu()
     {
         State = GameState.Menu;
-        player.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+
+        if (player != null) player.gameObject.SetActive(false);
 
         // Snap camera to start position immediately so there's no glitch when Play is pressed
         if (cameraFollow != null)
             cameraFollow.ResetCamera(playerStartPosition.y);
 
         if (menuHighScoreText != null)
-            menuHighScoreText.text = "Best: " + Mathf.FloorToInt(highScore * 10);
+            menuHighScoreText.text = "BEST: " + Mathf.FloorToInt(highScore * 10);
 
-        SetPanels(hud: false, menu: true, gameOver: false);
+        SetPanels(menu: true, hud: false, pause: false, gameOver: false, options: false, scores: false, store: false);
+    }
+
+    // ─── Navigation Pages ────────────────────────────────────
+
+    public void ShowOptions()
+    {
+        State = GameState.Options;
+        Time.timeScale = 1f;
+        SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: true, scores: false, store: false);
+    }
+
+    public void ShowScores()
+    {
+        State = GameState.Scores;
+        Time.timeScale = 1f;
+
+        if (scoresHighScoreText != null)
+            scoresHighScoreText.text = "BEST: " + Mathf.FloorToInt(highScore * 10);
+
+        SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: false, scores: true, store: false);
+    }
+
+    public void ShowStore()
+    {
+        State = GameState.Store;
+        Time.timeScale = 1f;
+        SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: false, scores: false, store: true);
+    }
+
+    // ─── Pause ───────────────────────────────────────────────
+
+    public void Pause()
+    {
+        if (State != GameState.Playing) return;
+
+        State = GameState.Paused;
+        Time.timeScale = 0f;
+
+        if (pausePanel != null) pausePanel.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        if (State != GameState.Paused) return;
+
+        State = GameState.Playing;
+        Time.timeScale = 1f;
+
+        if (pausePanel != null) pausePanel.SetActive(false);
     }
 
     // ─── Helpers ─────────────────────────────────────────────
-    void SetPanels(bool hud, bool menu, bool gameOver)
+
+    void SetPanels(bool menu, bool hud, bool pause, bool gameOver, bool options, bool scores, bool store)
     {
         if (menuPanel     != null) menuPanel.SetActive(menu);
         if (hudPanel      != null) hudPanel.SetActive(hud);
+        if (pausePanel    != null) pausePanel.SetActive(pause);
         if (gameOverPanel != null) gameOverPanel.SetActive(gameOver);
+        if (optionsPanel  != null) optionsPanel.SetActive(options);
+        if (scoresPanel   != null) scoresPanel.SetActive(scores);
+        if (storePanel    != null) storePanel.SetActive(store);
+
+        // If we're not paused, ensure pause overlay is off
+        if (State != GameState.Paused && pausePanel != null)
+            pausePanel.SetActive(false);
+    }
+
+    void HandlePauseHotkey()
+    {
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (State == GameState.Playing) Pause();
+            else if (State == GameState.Paused) Resume();
+        }
     }
 }

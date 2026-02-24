@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 345db130ad02848cf98c1481466c8b2b
+guid: 244fe6376411c4c1e91c3368cca3f373
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8166710274925509176
-    second: red_0
+      213: -4594549418809413186
+    second: Shop2_0
+  - first:
+      213: -1578809723016074371
+    second: Shop2_1
+  - first:
+      213: 4448123571757039150
+    second: Shop2_2
+  - first:
+      213: 6604474205622539643
+    second: Shop2_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +55,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 2000
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: red_0
+      name: Shop2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1876
-        height: 545
+        y: 125
+        width: 487
+        height: 350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83ab778d9bbf55170800000000000000
-      internalID: 8166710274925509176
+      spriteID: eb133e485a1ec30c0800000000000000
+      internalID: -4594549418809413186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2_1
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 208
+        width: 389
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7ba1bbfbe0f61ae0800000000000000
+      internalID: -1578809723016074371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2_2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 23
+        width: 88
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ebe9342d8eabd30800000000000000
+      internalID: 4448123571757039150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2_3
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 32
+        width: 83
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b759c5a4c4ec7ab50800000000000000
+      internalID: 6604474205622539643
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      red_0: 8166710274925509176
+      Shop2_0: -4594549418809413186
+      Shop2_1: -1578809723016074371
+      Shop2_2: 4448123571757039150
+      Shop2_3: 6604474205622539643
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
