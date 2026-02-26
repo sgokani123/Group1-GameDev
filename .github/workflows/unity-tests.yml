@@ -1,0 +1,70 @@
+name: Unity Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    name: Run Unity Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      # Cache Unity Library folder
+      - name: Cache Unity Library
+        uses: actions/cache@v5
+        with:
+          path: EscapeSchool/Library
+          key: Library-${{ hashFiles('EscapeSchool/Assets/**', 'EscapeSchool/Packages/**', 'EscapeSchool/ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Run Edit Mode tests
+      - name: Run Edit Mode Tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: EscapeSchool
+          testMode: EditMode
+          artifactsPath: test-results/editmode
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # Run Play Mode tests
+      - name: Run Play Mode Tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: EscapeSchool
+          testMode: PlayMode
+          artifactsPath: test-results/playmode
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # Upload test results
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: Test Results
+          path: test-results
+
+      # Publish test results
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            test-results/**/*.xml
