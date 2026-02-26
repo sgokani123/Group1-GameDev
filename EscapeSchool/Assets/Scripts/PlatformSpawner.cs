@@ -34,6 +34,9 @@ public class PlatformSpawner : MonoBehaviour
     private readonly List<GameObject> activePlatforms = new List<GameObject>();
     private Camera mainCam;
     private bool lastWasUnreliable = false;
+    // When a vertical mover is placed, force the next gap to be at least this value
+    // so the platform above can't be reached by the mover.
+    private float nextMinGap = 0f;
 
     void Start()
     {
@@ -83,7 +86,16 @@ public class PlatformSpawner : MonoBehaviour
         float extra = Mathf.Lerp(0f, extraGapAtMax, d);
 
         float gap = baseGap + extra;
-        return Mathf.Clamp(gap, minYGap, maxTotalGap);
+
+        // If the previous platform was a vertical mover, enforce a minimum gap
+        // so the mover can't reach this new platform.
+        if (nextMinGap > 0f)
+        {
+            gap = Mathf.Max(gap, nextMinGap);
+            nextMinGap = 0f;
+        }
+
+        return Mathf.Max(gap, minYGap);
     }
 
     float CurrentXRange(float height)
@@ -169,24 +181,38 @@ public class PlatformSpawner : MonoBehaviour
         // Safety clamp to ensure the repel didn't push it off-screen
         x = Mathf.Clamp(x, -xRange, xRange);
 
+        // Horizontal movers always spawn centered — ApplyType will sweep them edge-to-edge
+        if (type == 4) x = 0f;
+
+        // Gap from the previous platform (used to constrain vertical mover range)
+        float spawnGap = y - highestSpawnedY;
+
         // 7. Object Pooling: Get the platform and set it up
         GameObject p = pool.Get();
         p.transform.position = new Vector3(x, y, 0f);
         p.transform.rotation = Quaternion.identity;
 
         // 8. Initialize the Tile component
-        SetTileType(p, type, d);
+        SetTileType(p, type, d, spawnGap);
 
-        // 9. Tracking for the next spawn
+        // 9. If this is a vertical mover, schedule a large enough gap above it
+        if (type == 5)
+        {
+            Tile tile = p.GetComponent<Tile>();
+            if (tile != null)
+                nextMinGap = tile.moveRange + 0.5f;
+        }
+
+        // 10. Tracking for the next spawn
         activePlatforms.Add(p);
         highestSpawnedY = y;
         lastX = x;
     }
 
-    void SetTileType(GameObject p, int type, float difficulty01)
+    void SetTileType(GameObject p, int type, float difficulty01, float gap = 0f)
     {
         Tile tile = p.GetComponent<Tile>();
-        if (tile != null) tile.ApplyType(type, difficulty01);
+        if (tile != null) tile.ApplyType(type, difficulty01, gap);
     }
 
     int GetRandomTileType(float height, float d)
@@ -234,6 +260,7 @@ public class PlatformSpawner : MonoBehaviour
         highestSpawnedY = startY - 0.5f;
         lastWasUnreliable = false;
         lastX = 0f;
+        nextMinGap = 0f;
 
         SpawnInitialPlatforms(startY);
     }
