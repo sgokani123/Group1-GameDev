@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour
         ApplyType(tileType, 0f);
     }
 
-    public void ApplyType(int newType, float difficulty01)
+    public void ApplyType(int newType, float difficulty01, float gap = 0f)
     {
         tileType = newType;
 
@@ -58,6 +58,23 @@ public class Tile : MonoBehaviour
         {
             moveSpeed = 2f;
             moveRange = 3f;
+        }
+
+        // Horizontal mover: always center it and sweep edge-to-edge
+        if (tileType == 4)
+        {
+            Camera cam = Camera.main;
+            if (cam != null)
+                moveRange = cam.orthographicSize * cam.aspect - 0.3f;
+            startPos = new Vector3(0f, startPos.y, startPos.z);
+            transform.position = new Vector3(0f, transform.position.y, transform.position.z);
+        }
+        // Vertical mover: cap range so it cannot overlap the platform directly below.
+        // The spawner will ensure the platform above is also far enough.
+        else if (tileType == 5 && gap > 0f)
+        {
+            float maxRange = Mathf.Max(gap - 0.4f, 0.3f);
+            moveRange = Mathf.Min(moveRange, maxRange);
         }
 
         if (sp != null && sprites != null && tileType >= 0 && tileType < sprites.Length)
