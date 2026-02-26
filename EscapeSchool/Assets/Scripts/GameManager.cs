@@ -44,11 +44,17 @@ public class GameManager : MonoBehaviour
     public FollowTarget    cameraFollow;
     public PlatformSpawner platformSpawner;
 
+    [Header("Menu Controllers")]
+    public OptionsMenuController optionsMenuController;
+    public ScoresMenuController scoresMenuController;
+
     // ─── Private ──────────────────────────────────────────────
     [Header("Start Position")]
     public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f); // Set just above platform_0 in Inspector
     private float score;
     private float highScore;
+
+    
 
     // ─────────────────────────────────────────────────────────
     void Awake()
@@ -122,18 +128,21 @@ public class GameManager : MonoBehaviour
         float height = (player != null ? player.transform.position.y : playerStartPosition.y) - playerStartPosition.y;
         if (height > score) score = height;
 
-        // Save high score
+        // Final score (int)
         int finalScoreInt = Mathf.FloorToInt(score * 10);
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetFloat("HighScore", highScore);
-            PlayerPrefs.Save();
-        }
-        int highScoreInt = Mathf.FloorToInt(highScore * 10);
+
+        // Save/update this player's best score (only if a name is set)
+        LeaderboardManager.SubmitScore(finalScoreInt);
+
+        // Player best + global best
+        int playerBest = LeaderboardManager.GetBestForCurrentPlayer();
+        int globalBest = LeaderboardManager.GetGlobalBest();
+
+        // Keep your existing "highScore" float in sync (used elsewhere for menu BEST)
+        highScore = globalBest / 10f;
 
         if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
-        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + highScoreInt;
+        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + playerBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
@@ -159,7 +168,7 @@ public class GameManager : MonoBehaviour
             cameraFollow.ResetCamera(playerStartPosition.y);
 
         if (menuHighScoreText != null)
-            menuHighScoreText.text = "BEST: " + Mathf.FloorToInt(highScore * 10);
+            menuHighScoreText.text = "BEST: " + LeaderboardManager.GetGlobalBest();
 
         SetPanels(menu: true, hud: false, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
@@ -171,6 +180,9 @@ public class GameManager : MonoBehaviour
         State = GameState.Options;
         Time.timeScale = 1f;
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: true, scores: false, store: false);
+
+        if (optionsMenuController != null)
+            optionsMenuController.SyncFromSaved();
     }
 
     public void ShowScores()
@@ -178,10 +190,15 @@ public class GameManager : MonoBehaviour
         State = GameState.Scores;
         Time.timeScale = 1f;
 
+        // Show global best on scores page (optional)
+        int globalBest = LeaderboardManager.GetGlobalBest();
         if (scoresHighScoreText != null)
-            scoresHighScoreText.text = "BEST: " + Mathf.FloorToInt(highScore * 10);
+            scoresHighScoreText.text = "BEST: " + globalBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: false, scores: true, store: false);
+
+        if (scoresMenuController != null)
+            scoresMenuController.Refresh();
     }
 
     public void ShowStore()
