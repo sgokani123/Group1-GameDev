@@ -192,11 +192,11 @@ public class PlatformSpawner : MonoBehaviour
     int GetRandomTileType(float height, float d)
     {
         // Early: mostly normal. Later: more moving + broken/disposable.
-        int normalW     = Mathf.RoundToInt(Mathf.Lerp(78, 40, d));
+        int normalW     = Mathf.RoundToInt(Mathf.Lerp(72, 34, d));
         int movingW     = Mathf.RoundToInt(Mathf.Lerp(10, 26, d)); // split later
-        int brokenW     = Mathf.RoundToInt(Mathf.Lerp(6,  18, d));
-        int disposableW = Mathf.RoundToInt(Mathf.Lerp(4,  16, d));
-        int springW     = Mathf.RoundToInt(Mathf.Lerp(2,   6, d));
+        int brokenW     = Mathf.RoundToInt(Mathf.Lerp(8,  20, d));
+        int disposableW = Mathf.RoundToInt(Mathf.Lerp(6,  18, d));
+        int springW     = Mathf.RoundToInt(Mathf.Lerp(8,   16, d));
 
         int total = normalW + movingW + brokenW + disposableW + springW;
         int r = Random.Range(0, total);
