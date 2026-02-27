@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
 
     // ─── Scene References ─────────────────────────────────────
     [Header("References")]
-    public Player          player;
-    public FollowTarget    cameraFollow;
+    public Player player;
+    public FollowTarget cameraFollow;
     public PlatformSpawner platformSpawner;
 
     [Header("Menu Controllers")]
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private float score;
     private float highScore;
 
-    
+
 
     // ─────────────────────────────────────────────────────────
     void Awake()
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         HandlePauseHotkey();
-            
+
         if (State != GameState.Playing) return;
 
         // Score = units climbed above start position × 10
@@ -90,6 +90,15 @@ public class GameManager : MonoBehaviour
     /// Called by the "Play" button on the main menu
     public void StartGame()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.isGameOver = false;
+            MusicManager.Instance.GetComponent<AudioSource>().pitch = 1f;
+        }
+
         score = 0f;
         State = GameState.Playing;
         Time.timeScale = 1f;
@@ -124,6 +133,11 @@ public class GameManager : MonoBehaviour
         State = GameState.GameOver;
         Time.timeScale = 1f;
 
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.isGameOver = true;
+        }
+
         // Capture any last-frame height
         float height = (player != null ? player.transform.position.y : playerStartPosition.y) - playerStartPosition.y;
         if (height > score) score = height;
@@ -142,7 +156,7 @@ public class GameManager : MonoBehaviour
         highScore = globalBest / 10f;
 
         if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
-        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + playerBest;
+        if (highScoreText != null) highScoreText.text = "YOUR HIGH SCORE: " + playerBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
@@ -152,12 +166,24 @@ public class GameManager : MonoBehaviour
     /// Called by the "Retry" button on the game over screen
     public void RetryGame()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
         StartGame();
     }
 
     /// Called by "Menu" buttons to return to the main menu
     public void ShowMenu()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        if (MusicManager.Instance != null)
+        {
+            MusicManager.Instance.isGameOver = false;
+            MusicManager.Instance.GetComponent<AudioSource>().pitch = 1f;
+        }
+
         State = GameState.Menu;
         Time.timeScale = 1f;
 
@@ -177,6 +203,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowOptions()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
         State = GameState.Options;
         Time.timeScale = 1f;
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: true, scores: false, store: false);
@@ -187,6 +216,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowScores()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
         State = GameState.Scores;
         Time.timeScale = 1f;
 
@@ -203,6 +235,9 @@ public class GameManager : MonoBehaviour
 
     public void ShowStore()
     {
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
         State = GameState.Store;
         Time.timeScale = 1f;
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: false, scores: false, store: true);
@@ -214,6 +249,9 @@ public class GameManager : MonoBehaviour
     {
         if (State != GameState.Playing) return;
 
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
         State = GameState.Paused;
         Time.timeScale = 0f;
 
@@ -223,6 +261,9 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         if (State != GameState.Paused) return;
+
+        // click sound
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
 
         State = GameState.Playing;
         Time.timeScale = 1f;
@@ -234,13 +275,13 @@ public class GameManager : MonoBehaviour
 
     void SetPanels(bool menu, bool hud, bool pause, bool gameOver, bool options, bool scores, bool store)
     {
-        if (menuPanel     != null) menuPanel.SetActive(menu);
-        if (hudPanel      != null) hudPanel.SetActive(hud);
-        if (pausePanel    != null) pausePanel.SetActive(pause);
+        if (menuPanel != null) menuPanel.SetActive(menu);
+        if (hudPanel != null) hudPanel.SetActive(hud);
+        if (pausePanel != null) pausePanel.SetActive(pause);
         if (gameOverPanel != null) gameOverPanel.SetActive(gameOver);
-        if (optionsPanel  != null) optionsPanel.SetActive(options);
-        if (scoresPanel   != null) scoresPanel.SetActive(scores);
-        if (storePanel    != null) storePanel.SetActive(store);
+        if (optionsPanel != null) optionsPanel.SetActive(options);
+        if (scoresPanel != null) scoresPanel.SetActive(scores);
+        if (storePanel != null) storePanel.SetActive(store);
 
         // If we're not paused, ensure pause overlay is off
         if (State != GameState.Paused && pausePanel != null)
