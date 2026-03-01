@@ -11,7 +11,12 @@ public class PlatformSpawner : MonoBehaviour
     public GameObject enemyPrefab;      // Inspector enemy
     [Range(0, 1)]
     public float enemySpawnChance = 0.15f; //probabillity
- 
+
+    [Header("Rocket Spawn Settings")]
+    public GameObject rocketPrefab;      // дк Inspector rocket
+    [Range(0, 1)]
+    public float rocketSpawnChance = 0.05f; // probabillity
+
 
     [Header("Spawn Settings")]
     public float minX = -2.5f;
@@ -70,10 +75,8 @@ public class PlatformSpawner : MonoBehaviour
         {
             if (p != null && p.transform.position.y < camBottomY - 3f)
             {
-                //delet enemy
-                ClearEnemiesOnPlatform(p);
-                
-
+              
+                ClearObjectsOnPlatform(p);
                 pool.Return(p);
                 return true;
             }
@@ -111,15 +114,24 @@ public class PlatformSpawner : MonoBehaviour
         return Mathf.Min(range, camHalfWidth - 0.2f);
     }
 
-    //delete enemy
-    void ClearEnemiesOnPlatform(GameObject platform)
+    //delete enemy and rocket
+    void ClearObjectsOnPlatform(GameObject platform)
     {
-        //find the platform enemy and than delete
-        foreach (Transform child in platform.transform)
+       
+        if (platform == null) return;
+
+       
+        for (int i = platform.transform.childCount - 1; i >= 0; i--)
         {
-            if (child.CompareTag("Enemy"))
+            Transform child = platform.transform.GetChild(i);
+
+            
+            if (child != null && child.gameObject != null)
             {
-                Destroy(child.gameObject);
+                if (child.CompareTag("Enemy") || child.name.ToLower().Contains("rocket"))
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }
@@ -207,6 +219,16 @@ public class PlatformSpawner : MonoBehaviour
             SpawnEnemy(p);
         }
 
+        // rocket create on 0paltform
+        if (type == 0 && Random.value < rocketSpawnChance)
+        {
+            GameObject rocket = Instantiate(rocketPrefab);
+           
+            rocket.transform.position = p.transform.position + new Vector3(0, 0.7f, 0);
+
+            rocket.transform.SetParent(p.transform);
+        }
+
 
         // 9. Tracking for the next spawn
         activePlatforms.Add(p);
@@ -214,16 +236,30 @@ public class PlatformSpawner : MonoBehaviour
         lastX = x;
     }
 
+    void SpawnRocket(GameObject platform)
+    {
+        if (rocketPrefab == null) return;
+
+        // create rocket
+        Vector3 spawnPos = platform.transform.position + new Vector3(0, 0.7f, 0);
+        GameObject rocket = Instantiate(rocketPrefab, spawnPos, Quaternion.identity);
+
+   
+        rocket.transform.SetParent(platform.transform);
+    }
+
     //enemy create
     void SpawnEnemy(GameObject platform)
     {
-        if (enemyPrefab == null) return;
 
-        //create
+        if (enemyPrefab == null)
+        {
+            Debug.LogWarning("Enemy Prefab is missing on PlatformSpawner!");
+            return;
+        }
+
         Vector3 enemyPos = platform.transform.position + new Vector3(0, 0.6f, 0);
         GameObject enemy = Instantiate(enemyPrefab, enemyPos, Quaternion.identity);
-
-        //enemy is platform
         enemy.transform.SetParent(platform.transform);
     }
 
@@ -276,7 +312,7 @@ public class PlatformSpawner : MonoBehaviour
             if (p != null)
             {
                 //reset enemy
-                ClearEnemiesOnPlatform(p);
+                ClearObjectsOnPlatform(p);
 
                 pool.Return(p);
             }

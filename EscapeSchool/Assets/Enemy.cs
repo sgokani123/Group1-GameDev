@@ -54,11 +54,8 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // check player
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("enemy find player£¡");
-
             
             if (GameManager.Instance != null)
             {

@@ -7,6 +7,7 @@ TagManager:
   - Platdorm
   - Platform
   - Enemy
+  - Rocket
   layers:
   - Default
   - TransparentFX
