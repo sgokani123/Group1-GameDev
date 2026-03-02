@@ -2,14 +2,14 @@
 # This script runs Unity tests from the command line
 
 param(
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [ValidateSet("EditMode", "PlayMode", "All")]
     [string]$TestPlatform = "All",
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$UnityPath = "C:\Program Files\Unity\Hub\Editor\*\Editor\Unity.exe",
     
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$ResultsPath = "TestResults"
 )
 
@@ -33,7 +33,7 @@ if (-not (Test-Path $ResultsPath)) {
 $projectPath = Join-Path $PSScriptRoot "EscapeSchool"
 $timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
 
-function Run-UnityTests {
+function Invoke-UnityTests {
     param([string]$Platform)
     
     $resultsFile = Join-Path $ResultsPath "TestResults_${Platform}_${timestamp}.xml"
@@ -55,10 +55,12 @@ function Run-UnityTests {
     if ($process.ExitCode -eq 0) {
         Write-Host "✓ $Platform tests PASSED" -ForegroundColor Green
         return $true
-    } elseif ($process.ExitCode -eq 2) {
+    }
+    elseif ($process.ExitCode -eq 2) {
         Write-Host "✗ $Platform tests FAILED" -ForegroundColor Red
         return $false
-    } else {
+    }
+    else {
         Write-Host "✗ $Platform tests ERROR (Exit code: $($process.ExitCode))" -ForegroundColor Red
         return $false
     }
@@ -68,11 +70,12 @@ function Run-UnityTests {
 $allPassed = $true
 
 if ($TestPlatform -eq "All") {
-    $editModePassed = Run-UnityTests -Platform "EditMode"
-    $playModePassed = Run-UnityTests -Platform "PlayMode"
+    $editModePassed = Invoke-UnityTests -Platform "EditMode"
+    $playModePassed = Invoke-UnityTests -Platform "PlayMode"
     $allPassed = $editModePassed -and $playModePassed
-} else {
-    $allPassed = Run-UnityTests -Platform $TestPlatform
+}
+else {
+    $allPassed = Invoke-UnityTests -Platform $TestPlatform
 }
 
 # Summary
@@ -80,7 +83,8 @@ Write-Host "`n========================================" -ForegroundColor Cyan
 if ($allPassed) {
     Write-Host "All tests completed successfully!" -ForegroundColor Green
     exit 0
-} else {
+}
+else {
     Write-Host "Some tests failed. Check results in: $ResultsPath" -ForegroundColor Red
     exit 1
 }
