@@ -2,7 +2,9 @@
     "name": "PlayModeTests",
     "rootNamespace": "",
     "references": [
-        "Assembly-CSharp"
+        "Assembly-CSharp",
+        "GameAssembly",
+        "UnityEngine"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

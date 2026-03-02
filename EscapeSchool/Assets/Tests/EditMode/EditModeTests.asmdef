@@ -2,7 +2,9 @@
     "name": "EditModeTests",
     "rootNamespace": "",
     "references": [
-        "Assembly-CSharp"
+        "Assembly-CSharp",
+        "GameAssembly",
+        "UnityEngine"
     ],
     "includePlatforms": [
         "Editor"
