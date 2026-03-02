@@ -75,3 +75,4 @@ UserSettings/
 obj/
 
 **/*.meta
+.vscode/
