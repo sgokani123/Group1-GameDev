@@ -1,3 +1,7 @@
 {
-	"name": "GameAssembly"
+	"name": "GameAssembly",
+	"references": [
+		"Unity.InputSystem",
+		"Unity.TextMeshPro"
+	]
 }
