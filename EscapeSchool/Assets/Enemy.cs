@@ -14,8 +14,16 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        
         startPos = transform.position;
+    }
+
+    /// <summary>
+    /// Called by PlatformSpawner to limit the patrol range so the enemy stays
+    /// within the platform boundaries and does not clip into adjacent platforms.
+    /// </summary>
+    public void SetPatrolDistance(float maxDist)
+    {
+        distance = Mathf.Max(0.05f, maxDist);
     }
 
     void Update()
