@@ -106,7 +106,7 @@ public class GameManagerTests
     public void GameManager_Pause_FreezesTime()
     {
         // Arrange
-        gameManager.State = GameManager.GameState.Playing;
+        gameManager.StartGame();
 
         // Act
         gameManager.Pause();
@@ -120,8 +120,8 @@ public class GameManagerTests
     public void GameManager_Resume_UnfreezesTime()
     {
         // Arrange
-        gameManager.State = GameManager.GameState.Paused;
-        Time.timeScale = 0f;
+        gameManager.StartGame();
+        gameManager.Pause();
 
         // Act
         gameManager.Resume();
