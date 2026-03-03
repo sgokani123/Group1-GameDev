@@ -35,6 +35,9 @@ public class Rocket : MonoBehaviour
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         if (rb == null) yield break;
 
+        // Grey out and disable all enemies for the duration of the flight.
+        SetAllEnemiesImmune(true);
+
         // record original gravity
         originalGravity = rb.gravityScale;
         player.enabled = false;
@@ -93,6 +96,15 @@ public class Rocket : MonoBehaviour
             player.enabled = true;
         }
 
+        // Restore all enemies to normal.
+        SetAllEnemiesImmune(false);
+
         if (this != null) Destroy(gameObject);
+    }
+
+    static void SetAllEnemiesImmune(bool immune)
+    {
+        foreach (Enemy e in FindObjectsByType<Enemy>(FindObjectsSortMode.None))
+            e.SetRocketImmune(immune);
     }
 }
