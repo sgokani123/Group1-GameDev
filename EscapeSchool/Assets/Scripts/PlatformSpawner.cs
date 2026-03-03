@@ -366,7 +366,6 @@ public class PlatformSpawner : MonoBehaviour
         lastGapEnemyY = midY;
     }
 
-    void SetTileType(GameObject p, int type, float difficulty01)
     void SetTileType(GameObject p, int type, float difficulty01, float gap = 0f)
     {
         Tile tile = p.GetComponent<Tile>();
