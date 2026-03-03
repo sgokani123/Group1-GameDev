@@ -7459,6 +7459,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformSpawner
   platformPrefab: {fileID: 1128837973}
+  enemyPrefab: {fileID: 1831784274566584409, guid: 0ccf40489e30d854e9d185aaa8cb910d, type: 3}
+  enemySpawnChance: 0.15
+  rocketPrefab: {fileID: 3755819533679572437, guid: cb95eb16483a5e5428f48170389166db, type: 3}
+  rocketSpawnChance: 0.05
   minX: -2.5
   maxX: 2.5
   minYGap: 1
