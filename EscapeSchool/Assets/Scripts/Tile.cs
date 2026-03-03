@@ -115,6 +115,19 @@ public class Tile : MonoBehaviour
             case 0:
             case 4:
             case 5:
+              
+                player.Jump(1f);
+                break;
+
+            case 1: // broken 
+      
+                if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(4);
+                ConsumeAndFall();
+                break;
+
+            case 2: // disposable 
+              
+                if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(4);
                 player.Jump(1f);
                 break;
 
@@ -127,6 +140,9 @@ public class Tile : MonoBehaviour
                 ConsumeAndFall();
                 break;
 
+            case 3: // spring 
+            
+                if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(3);
             case 3: // spring
                 player.Jump(1.5f);
                 break;

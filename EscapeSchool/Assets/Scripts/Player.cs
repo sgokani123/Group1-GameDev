@@ -118,6 +118,9 @@ public class Player : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce * multiplier), ForceMode2D.Impulse);
+
+        // Play jump sound effect (index 3 in SoundManager's sfx array)
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(3);
     }
 
     private void Die()

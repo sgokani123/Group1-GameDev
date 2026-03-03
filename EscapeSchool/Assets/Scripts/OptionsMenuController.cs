@@ -7,6 +7,7 @@ public class OptionsMenuController : MonoBehaviour
     public TMP_InputField nameInput;
     public TMP_Text currentNameLabel;
 
+
     void OnEnable()
     {
         SyncFromSaved();
@@ -29,6 +30,7 @@ public class OptionsMenuController : MonoBehaviour
     public void SaveName()
     {
         if (nameInput == null) return;
+        SoundManager.Instance.PlaySFX(0); //  click sound
 
         LeaderboardManager.SetCurrentPlayerName(nameInput.text);
         SyncFromSaved();
