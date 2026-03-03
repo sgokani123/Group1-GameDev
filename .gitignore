@@ -73,3 +73,6 @@ Temp/
 Logs/
 UserSettings/
 obj/
+
+**/*.meta
+.vscode/

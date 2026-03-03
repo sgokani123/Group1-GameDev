@@ -118,6 +118,9 @@ public class Player : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpForce * multiplier), ForceMode2D.Impulse);
+
+        // Play jump sound effect (index 3 in SoundManager's sfx array)
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(3);
     }
 
     private void Die()
@@ -127,13 +130,27 @@ public class Player : MonoBehaviour
         GameManager.Instance.GameOver();
     }
 
-    // Called by GameManager when restarting
+   
     public void ResetPlayer(Vector3 startPosition)
     {
         isDead = false;
+        this.enabled = true; 
+
         transform.position = startPosition;
         if (rb == null) rb = GetComponent<Rigidbody2D>();
+
+        rb.gravityScale = 1f;
         rb.linearVelocity = Vector2.zero;
+
+        foreach (Transform child in transform)
+        {
+            
+            if (child.name.ToLower().Contains("rocket"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         RefreshBorders();
         Jump(1f);
     }

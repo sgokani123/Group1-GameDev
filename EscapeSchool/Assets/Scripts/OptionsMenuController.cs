@@ -70,6 +70,7 @@ public class OptionsMenuController : MonoBehaviour
     public void SaveName()
     {
         if (nameInput == null) return;
+        SoundManager.Instance.PlaySFX(0); //  click sound
 
         LeaderboardManager.SetCurrentPlayerName(nameInput.text);
         SyncFromSaved();
