@@ -41,3 +41,88 @@ For code changes, the team uses the **Git Workflow** pull requests to review and
 4. **Code Review**: Other team members review the pull request, providing feedback and suggestions for improvements. This helps to ensure code quality and consistency across the project.
 
 5. **Merging**: After the pull request has been reviewed and approved, it is merged into the main branch. This allows the new feature or task to be integrated into the project and made available for testing.
+
+## Automated Testing
+
+The project includes a comprehensive automated test suite to ensure code quality and catch bugs early. Tests are organized into two categories:
+
+### Test Structure
+
+- **Edit Mode Tests** (EscapeSchool/Assets/Tests/EditMode/): Unit tests that run in the Unity Editor without entering Play mode. These tests are fast and ideal for testing game logic, data structures, and utility functions.
+- **Play Mode Tests** (EscapeSchool/Assets/Tests/PlayMode/): Integration tests that run in Play mode, allowing testing of MonoBehaviour components, physics, and runtime behavior.
+
+### Running Tests
+
+#### Using Unity Test Runner (Recommended)
+
+1. Open the Unity project in Unity Editor
+2. Go to **Window > General > Test Runner**
+3. The Test Runner window will show two tabs: **EditMode** and **PlayMode**
+4. Click **Run All** in either tab to execute all tests in that category
+5. Click individual tests to run them separately
+6. View test results, including pass/fail status and execution time
+
+#### Using Unity Command Line
+
+Run all tests from the command line:
+
+```bash
+# Windows
+Unity.exe -runTests -batchmode -projectPath "path/to/EscapeSchool" -testResults "path/to/results.xml" -testPlatform EditMode
+
+# macOS
+/Applications/Unity/Unity.app/Contents/MacOS/Unity -runTests -batchmode -projectPath "path/to/EscapeSchool" -testResults "path/to/results.xml" -testPlatform EditMode
+```
+
+Replace -testPlatform EditMode with -testPlatform PlayMode to run Play mode tests.
+
+### Test Coverage
+
+Current test coverage includes:
+
+- **ObjectPool**: Object pooling functionality, reuse behavior, and memory management
+- **LeaderboardManager**: Score submission, player name management, and high score tracking
+- **Player**: Movement, jumping, position reset, and boundary management
+- **GameManager**: State management, UI panel transitions, pause/resume functionality
+
+### Adding New Tests
+
+1. Create a new C# script in the appropriate test folder (EditMode or PlayMode)
+2. Add using NUnit.Framework; and using UnityEngine.TestTools; (for PlayMode)
+3. Use [Test] attribute for synchronous tests
+4. Use [UnityTest] with IEnumerator for asynchronous tests that need to wait for frames
+5. Use [SetUp] and [TearDown] for test initialization and cleanup
+
+Example test structure:
+
+```csharp
+using NUnit.Framework;
+using UnityEngine;
+
+public class MyComponentTests
+{
+    [SetUp]
+    public void Setup()
+    {
+        // Initialize test objects
+    }
+
+    [Test]
+    public void MyComponent_DoSomething_ReturnsExpectedValue()
+    {
+        // Arrange
+        // Act
+        // Assert
+    }
+
+    [TearDown]
+    public void Teardown()
+    {
+        // Clean up test objects
+    }
+}
+```
+
+### Continuous Integration
+
+Tests can be integrated into CI/CD pipelines using Unity's command-line test execution. Configure your CI system to run tests automatically on each commit or pull request to maintain code quality.
