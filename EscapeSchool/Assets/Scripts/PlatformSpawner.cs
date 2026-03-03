@@ -6,6 +6,35 @@ public class PlatformSpawner : MonoBehaviour
     [Header("Platform Prefab")]
     public GameObject platformPrefab;
 
+    // enemy create
+    [Header("Monster Spawn Settings")]
+    public GameObject enemyPrefab;      // Inspector enemy
+
+    [Header("Gap Enemies (floating in mid-air)")]
+    [Tooltip("Scale applied to every enemy instance (0.5 = half size).")]
+    public float enemyScale = 0.5f;
+    [Tooltip("Gap enemies start appearing at this Y height.")]
+    public float gapEnemyMinHeight = 8f;
+    [Tooltip("Maximum spawn chance for a gap enemy per platform gap (scaled by difficulty).")]
+    [Range(0, 1)]
+    public float gapEnemyMaxChance = 0.35f;
+    [Tooltip("Minimum vertical distance between any two gap enemies at the start (sparse).")]
+    public float gapEnemySpacingStart = 18f;
+    [Tooltip("Minimum vertical distance between gap enemies at max difficulty (dense).")]
+    public float gapEnemySpacingEnd = 5f;
+    [Tooltip("Horizontal patrol distance for gap enemies.")]
+    public float gapEnemyPatrol = 1.2f;
+    [Tooltip("Minimum vertical gap size required before an enemy is considered. Larger values = only spawn in big gaps.")]
+    public float gapEnemyMinGapSize = 1.3f;
+    [Tooltip("Half-width of the 'jump path' dead zone around the arc midpoint X. Enemy won't spawn here.")]
+    public float gapEnemyJumpExclusion = 0.9f;
+
+    [Header("Rocket Spawn Settings")]
+    public GameObject rocketPrefab;      // �� Inspector rocket
+    [Range(0, 1)]
+    public float rocketSpawnChance = 0.025f; // probability
+
+
     [Header("Spawn Settings")]
     public float minX = -2.5f;
     public float maxX =  2.5f;
@@ -32,6 +61,9 @@ public class PlatformSpawner : MonoBehaviour
     private float highestSpawnedY;
     private float lastX;
     private readonly List<GameObject> activePlatforms = new List<GameObject>();
+    // Gap enemies are not parented to any platform – tracked separately for cleanup.
+    private readonly List<GameObject> activeGapEnemies = new List<GameObject>();
+    private float lastGapEnemyY = float.MinValue; // tracks spacing between gap enemies
     private Camera mainCam;
     private bool lastWasUnreliable = false;
     // When a vertical mover is placed, force the next gap to be at least this value
@@ -66,10 +98,22 @@ public class PlatformSpawner : MonoBehaviour
         {
             if (p != null && p.transform.position.y < camBottomY - 3f)
             {
+                ClearObjectsOnPlatform(p);
                 pool.Return(p);
                 return true;
             }
             return p == null;
+        });
+
+        // Clean up gap enemies that have scrolled below the camera.
+        activeGapEnemies.RemoveAll(e =>
+        {
+            if (e == null || e.transform.position.y < camBottomY - 3f)
+            {
+                if (e != null) Destroy(e);
+                return true;
+            }
+            return false;
         });
     }
 
@@ -110,6 +154,28 @@ public class PlatformSpawner : MonoBehaviour
         // Never exceed camera bounds (safe clamp)
         float camHalfWidth = mainCam != null ? mainCam.orthographicSize * mainCam.aspect : range;
         return Mathf.Min(range, camHalfWidth - 0.2f);
+    }
+
+    //delete enemy and rocket
+    void ClearObjectsOnPlatform(GameObject platform)
+    {
+       
+        if (platform == null) return;
+
+       
+        for (int i = platform.transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = platform.transform.GetChild(i);
+
+            
+            if (child != null && child.gameObject != null)
+            {
+                if (child.CompareTag("Enemy") || child.name.ToLower().Contains("rocket"))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
     }
 
     void SpawnInitialPlatforms(float startY = -0.5f)
@@ -188,6 +254,7 @@ public class PlatformSpawner : MonoBehaviour
         float spawnGap = y - highestSpawnedY;
 
         // 7. Object Pooling: Get the platform and set it up
+        float prevY = highestSpawnedY; // capture before we overwrite it below
         GameObject p = pool.Get();
         p.transform.position = new Vector3(x, y, 0f);
         p.transform.rotation = Quaternion.identity;
@@ -203,12 +270,103 @@ public class PlatformSpawner : MonoBehaviour
                 nextMinGap = tile.moveRange + 0.5f;
         }
 
+        // Gap enemy – floats in the space between prevY and y, no platform attachment.
+        // Pass both platform X positions so the enemy can dodge the jump arc.
+        TrySpawnGapEnemy(prevY, y, lastX, x, d);
+
+        // rocket create on 0paltform
+        if (type == 0 && Random.value < rocketSpawnChance)
+        {
+            GameObject rocket = Instantiate(rocketPrefab);
+           
+            rocket.transform.position = p.transform.position + new Vector3(0, 0.7f, 0);
+
+            rocket.transform.SetParent(p.transform);
+        }
+
+
+        // 9. Tracking for the next spawn
         // 10. Tracking for the next spawn
         activePlatforms.Add(p);
         highestSpawnedY = y;
         lastX = x;
     }
 
+    void SpawnRocket(GameObject platform)
+    {
+        if (rocketPrefab == null) return;
+
+        // create rocket
+        Vector3 spawnPos = platform.transform.position + new Vector3(0, 0.7f, 0);
+        GameObject rocket = Instantiate(rocketPrefab, spawnPos, Quaternion.identity);
+
+   
+        rocket.transform.SetParent(platform.transform);
+    }
+
+    // --- Gap enemy spawning -------------------------------------------------
+
+    void TrySpawnGapEnemy(float bottomY, float topY, float bottomX, float topX, float d)
+    {
+        if (enemyPrefab == null) return;
+
+        float gapSize = topY - bottomY;
+        float midY = (bottomY + topY) * 0.5f;
+
+        // Only spawn in gaps large enough to give the enemy room without blocking the path.
+        if (gapSize < gapEnemyMinGapSize) return;
+
+        // Not below the minimum height.
+        if (midY < gapEnemyMinHeight) return;
+
+        // Enforce progressive spacing: starts large (sparse) and shrinks to dense.
+        float minSpacing = Mathf.Lerp(gapEnemySpacingStart, gapEnemySpacingEnd, d);
+        if (midY - lastGapEnemyY < minSpacing) return;
+
+        // Chance also ramps with difficulty so the very first gap enemies are rare.
+        float ramp = Mathf.Clamp01((midY - gapEnemyMinHeight) / 30f);
+        float chance = gapEnemyMaxChance * ramp * Mathf.Lerp(0.3f, 1f, d);
+        if (Random.value > chance) return;
+
+        // --- Position away from the player's jump arc ---
+        // The arc midpoint X is the horizontal centre between the two platforms.
+        float jumpMidX = (bottomX + topX) * 0.5f;
+        float xRange   = CurrentXRange(midY);
+
+        // Try up to 8 times to find an X outside the exclusion zone.
+        float ex = 0f;
+        bool placed = false;
+        for (int attempt = 0; attempt < 8; attempt++)
+        {
+            float candidate = Random.Range(-xRange * 0.85f, xRange * 0.85f);
+            if (Mathf.Abs(candidate - jumpMidX) >= gapEnemyJumpExclusion)
+            {
+                ex = candidate;
+                placed = true;
+                break;
+            }
+        }
+
+        // If every attempt landed in the dead zone (very narrow screen), skip spawn.
+        if (!placed) return;
+
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(ex, midY, 0f), Quaternion.identity);
+
+        // Same visual scale as platform enemies.
+        float s = Mathf.Clamp(enemyScale, 0.1f, 2f);
+        enemy.transform.localScale = new Vector3(s, s, 1f);
+
+        // Patrol distance: use inspector value, also slightly wider at higher difficulty.
+        float patrol = Mathf.Lerp(gapEnemyPatrol, gapEnemyPatrol * 1.5f, d);
+        Enemy enemyComp = enemy.GetComponent<Enemy>();
+        if (enemyComp != null)
+            enemyComp.SetPatrolDistance(patrol);
+
+        activeGapEnemies.Add(enemy);
+        lastGapEnemyY = midY;
+    }
+
+    void SetTileType(GameObject p, int type, float difficulty01)
     void SetTileType(GameObject p, int type, float difficulty01, float gap = 0f)
     {
         Tile tile = p.GetComponent<Tile>();
@@ -254,12 +412,26 @@ public class PlatformSpawner : MonoBehaviour
         }
 
         foreach (var p in activePlatforms)
-            if (p != null) pool.Return(p);
+        {
+            if (p != null)
+            {
+                //reset enemy
+                ClearObjectsOnPlatform(p);
+
+                pool.Return(p);
+            }
+        }
 
         activePlatforms.Clear();
+        // Destroy any surviving gap enemies.
+        foreach (var e in activeGapEnemies)
+            if (e != null) Destroy(e);
+        activeGapEnemies.Clear();
+
         highestSpawnedY = startY - 0.5f;
         lastWasUnreliable = false;
         lastX = 0f;
+        lastGapEnemyY = float.MinValue;
         nextMinGap = 0f;
 
         SpawnInitialPlatforms(startY);
