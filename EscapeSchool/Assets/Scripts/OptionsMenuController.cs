@@ -23,7 +23,7 @@ public class OptionsMenuController : MonoBehaviour
         ApplyFontSizes();
 
         // Fix background to camera while options are open
-        backgroundAjust = FindObjectOfType<Ajust>();
+        backgroundAjust = FindFirstObjectByType<Ajust>();
         if (backgroundAjust != null)
         {
             prevFollowCamera = backgroundAjust.followCamera;

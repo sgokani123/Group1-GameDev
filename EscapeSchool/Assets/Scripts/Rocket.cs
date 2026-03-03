@@ -20,6 +20,9 @@ public class Rocket : MonoBehaviour
         if (player == null || !player.enabled) return;
 
         isUsed = true;
+
+       if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(2);
+
         StartCoroutine(FlyRoutine(player));
     }
 
