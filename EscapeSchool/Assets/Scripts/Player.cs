@@ -66,12 +66,12 @@ public class Player : MonoBehaviour
         if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
         {
             acc.x = -1f;
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
         {
             acc.x = 1f;
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         // Store horizontal input for FixedUpdate physics write
