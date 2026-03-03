@@ -115,35 +115,22 @@ public class Tile : MonoBehaviour
             case 0:
             case 4:
             case 5:
-              
                 player.Jump(1f);
                 break;
 
-            case 1: // broken 
-      
+            case 1: // broken – play sound, then fall away
                 if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(4);
                 ConsumeAndFall();
                 break;
 
-            case 2: // disposable 
-              
+            case 2: // disposable – one bounce then fall away
                 if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(4);
                 player.Jump(1f);
-                break;
-
-            case 1: // broken
                 ConsumeAndFall();
                 break;
 
-            case 2: // disposable (one-time)
-                player.Jump(1f);
-                ConsumeAndFall();
-                break;
-
-            case 3: // spring 
-            
+            case 3: // spring – big boost
                 if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(3);
-            case 3: // spring
                 player.Jump(1.5f);
                 break;
 
