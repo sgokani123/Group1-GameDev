@@ -1,5 +1,4 @@
 ﻿<Solution>
-  <Project Path="EditModeTests.csproj" />
-  <Project Path="GameAssembly.csproj" />
-  <Project Path="PlayModeTests.csproj" />
+  <Project Path="EscapeSchool.Tests.EditMode.csproj" />
+  <Project Path="EscapeSchool.csproj" />
 </Solution>
