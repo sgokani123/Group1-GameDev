@@ -31,6 +31,20 @@ public class Player : MonoBehaviour
 
     public void SetFloorY(float y) { floorY = y; }
 
+    /// <summary>Wraps the player across screen edges. Called by Rocket during flight
+    /// because player.enabled = false disables Update().</summary>
+    public void WrapPosition()
+    {
+        if (mainCam == null) mainCam = Camera.main;
+        if (mainCam == null) return;
+        Vector3 pos = transform.position;
+        if (pos.x < leftBorder - buffer)
+            pos.x = rightBorder + buffer;
+        else if (pos.x > rightBorder + buffer)
+            pos.x = leftBorder - buffer;
+        transform.position = pos;
+    }
+
     /// <summary>Called by OptionsMenuController slider. sliderValue 0-100.</summary>
     public void SetSpeedFromSlider(float sliderValue)
     {

@@ -58,6 +58,7 @@ public class Rocket : MonoBehaviour
                 else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveX = 1f;
             }
             rb.linearVelocity = new Vector2(moveX * player.moveSpeed, flySpeed);
+            player.WrapPosition();
             yield return null;
         }
 
@@ -79,6 +80,7 @@ public class Rocket : MonoBehaviour
                     else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveX = 1f;
                 }
                 rb.linearVelocity = new Vector2(moveX * player.moveSpeed, rb.linearVelocity.y);
+                player.WrapPosition();
                 yield return null;
             }
         }
