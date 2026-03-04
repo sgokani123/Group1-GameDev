@@ -148,15 +148,26 @@ public class GameManager : MonoBehaviour
         // Save/update this player's best score (only if a name is set)
         LeaderboardManager.SubmitScore(finalScoreInt);
 
+        // Always persist a simple best score regardless of whether a name is set
+        int savedBest = PlayerPrefs.GetInt("BestScore", 0);
+        if (finalScoreInt > savedBest)
+        {
+            savedBest = finalScoreInt;
+            PlayerPrefs.SetInt("BestScore", savedBest);
+            PlayerPrefs.Save();
+        }
+
         // Player best + global best
         int playerBest = LeaderboardManager.GetBestForCurrentPlayer();
+        // Use leaderboard best when a name is set, otherwise fall back to the anonymous best
+        int displayBest = playerBest > 0 ? playerBest : savedBest;
         int globalBest = LeaderboardManager.GetGlobalBest();
 
         // Keep your existing "highScore" float in sync (used elsewhere for menu BEST)
-        highScore = globalBest / 10f;
+        highScore = (globalBest > 0 ? globalBest : savedBest) / 10f;
 
         if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
-        if (highScoreText != null) highScoreText.text = "YOUR HIGH SCORE: " + playerBest;
+        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + displayBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
