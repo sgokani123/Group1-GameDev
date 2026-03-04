@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    // Min/max world-units per second for the speed slider (slider 0-100 maps across this range)
+    public const float SpeedMin = 2f;
+    public const float SpeedMax = 14f;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 12f;
@@ -27,11 +31,22 @@ public class Player : MonoBehaviour
 
     public void SetFloorY(float y) { floorY = y; }
 
+    /// <summary>Called by OptionsMenuController slider. sliderValue 0-100.</summary>
+    public void SetSpeedFromSlider(float sliderValue)
+    {
+        moveSpeed = Mathf.Lerp(SpeedMin, SpeedMax, sliderValue / 100f);
+        PlayerPrefs.SetFloat("PlayerSpeed", sliderValue);
+        PlayerPrefs.Save();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCam = Camera.main;
         RefreshBorders();
+        // Restore saved speed
+        float saved = PlayerPrefs.GetFloat("PlayerSpeed", 38f); // 38 ≈ moveSpeed 5f default
+        SetSpeedFromSlider(saved);
     }
 
     // Ensure references are valid when the component is enabled (prevents NRE when toggled)

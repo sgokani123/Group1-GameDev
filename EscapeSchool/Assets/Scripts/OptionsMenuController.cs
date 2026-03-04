@@ -21,7 +21,12 @@ public class OptionsMenuController : MonoBehaviour
     public Sprite soundOnSprite;
     [Tooltip("Sprite shown when sound is OFF → assign Botton off.png")]
     public Sprite soundOffSprite;
-
+    // ── Speed slider ──────────────────────────────────────────────────────────
+    [Header("UI - Speed")]
+    [Tooltip("The Slider (0-100) that controls player move speed.")]
+    public UnityEngine.UI.Slider speedSlider;
+    [Tooltip("Label showing the current speed value, e.g. '60'.")]
+    public TMP_Text speedValueLabel;
     // ── Key Binds ────────────────────────────────────────────────────────────
     [Header("UI - Key Binds")]
     [Tooltip("Text showing the current left-move key.")]
@@ -68,6 +73,7 @@ public class OptionsMenuController : MonoBehaviour
         SyncFromSaved();
         RefreshSoundLabel();
         RefreshKeyLabels();
+        RefreshSpeedSlider();
 
         if (howToPlayPanel    != null) howToPlayPanel.SetActive(false);
         if (rebindStatusLabel != null) rebindStatusLabel.gameObject.SetActive(false);
@@ -123,6 +129,34 @@ public class OptionsMenuController : MonoBehaviour
     {
         if (soundButtonImage == null) return;
         soundButtonImage.sprite = SoundManager.Instance.IsMuted ? soundOffSprite : soundOnSprite;
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    //  Speed slider
+    // ════════════════════════════════════════════════════════════════════════
+
+    private void RefreshSpeedSlider()
+    {
+        if (speedSlider == null) return;
+        float saved = PlayerPrefs.GetFloat("PlayerSpeed", 38f);
+        // Update slider without triggering OnValueChanged callback
+        speedSlider.SetValueWithoutNotify(saved);
+        if (speedValueLabel != null) speedValueLabel.text = Mathf.RoundToInt(saved).ToString();
+    }
+
+    /// <summary>Hook to the Slider's OnValueChanged event.</summary>
+    public void OnSpeedChanged(float value)
+    {
+        // Always persist — Player.Start() will pick this up when the game begins
+        PlayerPrefs.SetFloat("PlayerSpeed", value);
+        PlayerPrefs.Save();
+
+        // Also apply immediately if Player is already active in the scene (in-game options)
+        // includeInactive:true so we find it even when it's disabled
+        Player player = FindObjectOfType<Player>(true);
+        if (player != null) player.SetSpeedFromSlider(value);
+
+        if (speedValueLabel != null) speedValueLabel.text = Mathf.RoundToInt(value).ToString();
     }
 
     // ════════════════════════════════════════════════════════════════════════
