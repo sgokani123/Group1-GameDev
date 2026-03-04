@@ -1,15 +1,24 @@
 fileFormatVersion: 2
-guid: 5a786792200d7457b8942bd10e62f5ac
+guid: 2a9025581df4c479696303fd3c1456d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2199646105569715526
-    second: Tap2_0
+      213: -3769324444368065086
+    second: Chemical bottle_0
+  - first:
+      213: 3671213224971893384
+    second: Chemical bottle_1
+  - first:
+      213: -4070820773240983774
+    second: Chemical bottle_2
+  - first:
+      213: -8850783609598370127
+    second: Chemical bottle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -53,7 +62,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -72,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tap2_0
+      name: Chemical bottle_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 3508
-        height: 1653
+        y: 894
+        width: 162
+        height: 151
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aba12fd65894971e0800000000000000
-      internalID: -2199646105569715526
+      spriteID: 2cdae3a736ba0bbc0800000000000000
+      internalID: -3769324444368065086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chemical bottle_1
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 885
+        width: 153
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a7a292af4c2f230800000000000000
+      internalID: 3671213224971893384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chemical bottle_2
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 591
+        width: 141
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22fa0ba231a8187c0800000000000000
+      internalID: -4070820773240983774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chemical bottle_3
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 0
+        width: 761
+        height: 845
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1be1a065333bb2580800000000000000
+      internalID: -8850783609598370127
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tap2_0: -2199646105569715526
+      Chemical bottle_0: -3769324444368065086
+      Chemical bottle_1: 3671213224971893384
+      Chemical bottle_2: -4070820773240983774
+      Chemical bottle_3: -8850783609598370127
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

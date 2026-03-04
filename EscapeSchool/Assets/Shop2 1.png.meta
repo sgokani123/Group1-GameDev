@@ -1,15 +1,24 @@
 fileFormatVersion: 2
-guid: 5a786792200d7457b8942bd10e62f5ac
+guid: ac59ba4e248114b1482a7c9ec87f5f0c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2199646105569715526
-    second: Tap2_0
+      213: -4995130634462181326
+    second: Shop2 1_0
+  - first:
+      213: -3841512732762077414
+    second: Shop2 1_1
+  - first:
+      213: 1459718374042537447
+    second: Shop2 1_2
+  - first:
+      213: -619933872708845172
+    second: Shop2 1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,14 +55,14 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -72,7 +81,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tap2_0
+      name: Shop2 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 3508
-        height: 1653
+        y: 125
+        width: 487
+        height: 350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aba12fd65894971e0800000000000000
-      internalID: -2199646105569715526
+      spriteID: 238c53e372bbdaab0800000000000000
+      internalID: -4995130634462181326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2 1_1
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 208
+        width: 389
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a178393d58430bac0800000000000000
+      internalID: -3841512732762077414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2 1_2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 23
+        width: 88
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ed8ae49026f14410800000000000000
+      internalID: 1459718374042537447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shop2 1_3
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 32
+        width: 83
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8105f46d6d8567f0800000000000000
+      internalID: -619933872708845172
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Tap2_0: -2199646105569715526
+      Shop2 1_0: -4995130634462181326
+      Shop2 1_1: -3841512732762077414
+      Shop2 1_2: 1459718374042537447
+      Shop2 1_3: -619933872708845172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
