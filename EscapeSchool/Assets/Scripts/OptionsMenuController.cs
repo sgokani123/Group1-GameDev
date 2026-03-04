@@ -12,6 +12,8 @@ public class OptionsMenuController : MonoBehaviour
     [Header("UI - Name")]
     public TMP_InputField nameInput;
     public TMP_Text currentNameLabel;
+    [Tooltip("Label that shows validation errors in red. Optional.")]
+    public TMP_Text nameValidationLabel;
 
     // ── Sound ────────────────────────────────────────────────────────────────
     [Header("UI - Sound")]
@@ -91,24 +93,42 @@ public class OptionsMenuController : MonoBehaviour
 
     public void SyncFromSaved()
     {
-        string current = LeaderboardManager.GetCurrentPlayerName();
+        string current = LeaderboardManager.GetCurrentPlayerName(); // returns "Anonymous" if not set
 
         if (nameInput != null)
-            nameInput.SetTextWithoutNotify(current);
+            nameInput.SetTextWithoutNotify(current == LeaderboardManager.DefaultName ? "" : current);
 
         if (currentNameLabel != null)
-            currentNameLabel.text = string.IsNullOrWhiteSpace(current)
-                ? "Current: (not set)"
-                : "Current: " + current;
+            currentNameLabel.text = "Logged in as: " + current;
+
+        if (nameValidationLabel != null)
+            nameValidationLabel.gameObject.SetActive(false);
     }
 
     /// <summary>Hook this to the Save button or NameInput -> OnEndEdit.</summary>
     public void SaveName()
     {
         if (nameInput == null) return;
+
+        string input = nameInput.text.Trim();
+        string error = LeaderboardManager.TrySetCurrentPlayerName(input);
+
+        if (error != null)
+        {
+            // Show validation error
+            if (nameValidationLabel != null)
+            {
+                nameValidationLabel.text  = error;
+                nameValidationLabel.color = new UnityEngine.Color(0.85f, 0.1f, 0.1f);
+                nameValidationLabel.gameObject.SetActive(true);
+            }
+            return;
+        }
+
         SoundManager.Instance.PlaySFX(0);
-        LeaderboardManager.SetCurrentPlayerName(nameInput.text);
         SyncFromSaved();
+        // Push new name to HUD immediately if game is running
+        GameManager.Instance?.RefreshLoggedInLabels();
     }
 
     // ════════════════════════════════════════════════════════════════════════

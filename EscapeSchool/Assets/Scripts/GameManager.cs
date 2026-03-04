@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
 
     // ─── HUD Text ─────────────────────────────────────────────
     [Header("HUD")]
-    public TextMeshProUGUI scoreText;       // Shows live score during play
+    public TextMeshProUGUI scoreText;         // Shows live score during play
+    public TextMeshProUGUI hudLoggedInText;   // "Logged in as: Name" shown in-game
 
     // ─── Game Over Text ───────────────────────────────────────
     [Header("Game Over Screen")]
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     // ─── Main Menu Text ───────────────────────────────────────
     [Header("Menu / Scores")]
     public TextMeshProUGUI menuHighScoreText;    // Best score shown on menu (optional)
+    public TextMeshProUGUI menuLoggedInText;     // "Playing as: Name" shown on main menu
     public TextMeshProUGUI scoresHighScoreText;  // Best score shown on scores page (optional)
 
     // ─── Scene References ─────────────────────────────────────
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
             player.ResetPlayer(playerStartPosition);
 
+        RefreshLoggedInLabels();
         SetPanels(menu: false, hud: true, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
 
@@ -208,6 +211,7 @@ public class GameManager : MonoBehaviour
         if (menuHighScoreText != null)
             menuHighScoreText.text = "BEST: " + LeaderboardManager.GetGlobalBest();
 
+        RefreshLoggedInLabels();
         SetPanels(menu: true, hud: false, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
 
@@ -321,7 +325,13 @@ public class GameManager : MonoBehaviour
     }
 
     // ─── Helpers ─────────────────────────────────────────────
-
+    /// <summary>Updates the "Logged in as" labels in both HUD and main menu.</summary>
+    public void RefreshLoggedInLabels()
+    {
+        string name = LeaderboardManager.GetCurrentPlayerName();
+        if (hudLoggedInText  != null) hudLoggedInText.text  = "Logged in as: " + name;
+        if (menuLoggedInText != null) menuLoggedInText.text = "Playing as: " + name;
+    }
     void SetPanels(bool menu, bool hud, bool pause, bool gameOver, bool options, bool scores, bool store)
     {
         if (menuPanel != null) menuPanel.SetActive(menu);

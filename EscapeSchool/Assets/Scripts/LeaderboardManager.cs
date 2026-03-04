@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class LeaderboardManager
 {
     private const string CurrentNameKey = "current_player_name";
     private const string LeaderboardKey = "leaderboard_v1"; // stored as JSON
+    public  const string DefaultName    = "Anonymous";
+    public  const int    MaxNameLength  = 15;
 
     [Serializable]
     private class Entry
@@ -22,24 +25,54 @@ public static class LeaderboardManager
     }
 
     // ---------- Name ----------
+
+    /// <summary>Returns the saved name, or "Anonymous" if none is set.</summary>
     public static string GetCurrentPlayerName()
     {
-        return PlayerPrefs.GetString(CurrentNameKey, "");
+        string n = PlayerPrefs.GetString(CurrentNameKey, "");
+        return string.IsNullOrEmpty(n) ? DefaultName : n;
     }
 
-    public static void SetCurrentPlayerName(string name)
+    /// <summary>
+    /// Validates then saves the name. Returns null on success, or an error string to show the user.
+    /// Passing empty/null resets back to Anonymous.
+    /// </summary>
+    public static string TrySetCurrentPlayerName(string name)
     {
-        name = SanitizeName(name);
-        PlayerPrefs.SetString(CurrentNameKey, name);
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            PlayerPrefs.SetString(CurrentNameKey, "");
+            PlayerPrefs.Save();
+            return null;
+        }
+        string error = ValidateName(name);
+        if (error != null) return error;
+        PlayerPrefs.SetString(CurrentNameKey, name.Trim());
         PlayerPrefs.Save();
+        return null;
+    }
+
+    /// <summary>Legacy setter — used internally. Silently ignores invalid names.</summary>
+    public static void SetCurrentPlayerName(string name) => TrySetCurrentPlayerName(name);
+
+    /// <summary>
+    /// Returns null if valid, or a short error message.
+    /// Rules: letters + digits only, no spaces, 1–15 chars.
+    /// </summary>
+    public static string ValidateName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return null; // empty = reset
+        name = name.Trim();
+        if (name.Length > MaxNameLength)  return $"Max {MaxNameLength} characters";
+        if (name.Contains(" "))           return "No spaces allowed";
+        if (!Regex.IsMatch(name, @"^[A-Za-z0-9]+$")) return "Letters and numbers only";
+        return null;
     }
 
     // ---------- Scores ----------
     public static void SubmitScore(int score)
     {
-        string current = GetCurrentPlayerName();
-        if (string.IsNullOrWhiteSpace(current)) return; // no name set => don't save
-
+        string current = GetCurrentPlayerName(); // always at least "Anonymous"
         var list = Load();
 
         // Case-sensitive match (caps allowed; not treated as “sensitive”)
@@ -61,8 +94,6 @@ public static class LeaderboardManager
     public static int GetBestForCurrentPlayer()
     {
         string current = GetCurrentPlayerName();
-        if (string.IsNullOrWhiteSpace(current)) return 0;
-
         var list = Load();
         var entry = list.entries.FirstOrDefault(e => e.name == current);
         return entry != null ? entry.bestScore : 0;
@@ -111,17 +142,5 @@ public static class LeaderboardManager
         PlayerPrefs.Save();
     }
 
-    private static string SanitizeName(string name)
-    {
-        if (name == null) return "";
-        name = name.Trim();
 
-        // prevent newlines / weird whitespace
-        name = name.Replace("\n", " ").Replace("\r", " ").Replace("\t", " ");
-
-        // optional: limit length so UI doesn’t explode
-        if (name.Length > 16) name = name.Substring(0, 16);
-
-        return name;
-    }
 }
