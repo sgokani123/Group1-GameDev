@@ -11,8 +11,15 @@ public class SoundManager : MonoSingleton<SoundManager>
     protected override void Awake()
     {
         base.Awake();
-        ad = GetComponent<AudioSource>();
+        ad = GetComponent<AudioSource>();        // Restore persisted mute state on startup
+        AudioListener.volume = PlayerPrefs.GetInt("SoundMuted", 0) == 1 ? 0f : 1f;
     }
+
+    public bool IsMuted => AudioListener.volume < 0.5f;
+
+    public void SetMuted(bool muted)
+    {
+        AudioListener.volume = muted ? 0f : 1f;    }
 
     public void PlaySFX(int id)
     {

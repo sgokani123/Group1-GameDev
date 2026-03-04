@@ -63,12 +63,12 @@ public class Player : MonoBehaviour
 
         Vector3 acc = Vector3.zero;
 
-        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
+        if (KeyBindings.IsLeftPressed())
         {
             acc.x = -1f;
             transform.localScale = new Vector3(1, 1, 1);
         }
-        else if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
+        else if (KeyBindings.IsRightPressed())
         {
             acc.x = 1f;
             transform.localScale = new Vector3(-1, 1, 1);
