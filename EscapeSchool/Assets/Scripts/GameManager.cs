@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f); // Set just above platform_0 in Inspector
     private float score;
     private float highScore;
+    private bool optionsOpenedFromPause = false;
 
 
 
@@ -217,12 +218,49 @@ public class GameManager : MonoBehaviour
         // click sound
         if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
 
+        optionsOpenedFromPause = false;
         State = GameState.Options;
         Time.timeScale = 1f;
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: true, scores: false, store: false);
 
         if (optionsMenuController != null)
             optionsMenuController.SyncFromSaved();
+    }
+
+    /// <summary>Opens Options from the Pause screen — game stays paused, back returns to pause.</summary>
+    public void ShowOptionsFromPause()
+    {
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        optionsOpenedFromPause = true;
+        State = GameState.Options;
+        // Keep timeScale = 0 so the game stays paused
+        if (optionsPanel  != null) optionsPanel.SetActive(true);
+        if (pausePanel    != null) pausePanel.SetActive(false);
+        if (hudPanel      != null) hudPanel.SetActive(false);
+
+        if (optionsMenuController != null)
+            optionsMenuController.SyncFromSaved();
+    }
+
+    /// <summary>Called by the MenuButton inside OptionsPanel. Returns to pause if that's where we came from.</summary>
+    public void CloseOptions()
+    {
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        if (optionsOpenedFromPause)
+        {
+            optionsOpenedFromPause = false;
+            State = GameState.Paused;
+            // Time stays at 0 — still paused
+            if (optionsPanel != null) optionsPanel.SetActive(false);
+            if (pausePanel   != null) pausePanel.SetActive(true);
+            if (hudPanel     != null) hudPanel.SetActive(true);
+        }
+        else
+        {
+            ShowMenu();
+        }
     }
 
     public void ShowScores()
