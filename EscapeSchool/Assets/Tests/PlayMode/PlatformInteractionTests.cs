@@ -34,7 +34,6 @@ public class PlatformInteractionTests
     {
         // Arrange
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 0; // Normal platform
@@ -53,7 +52,6 @@ public class PlatformInteractionTests
     {
         // Arrange
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 3; // Spring platform
@@ -74,7 +72,6 @@ public class PlatformInteractionTests
     {
         // Arrange & Act
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 1; // Broken platform
@@ -90,7 +87,6 @@ public class PlatformInteractionTests
     {
         // Arrange & Act
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 2; // Disposable platform
