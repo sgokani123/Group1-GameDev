@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>05/03/2026 - 12:25:39</Generatedon>
+    <Generatedon>05/03/2026 - 12:51:23</Generatedon>
     <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
     <Assemblies>3</Assemblies>
     <Classes>32</Classes>
     <Files>32</Files>
-    <Coveredlines>1521</Coveredlines>
-    <Uncoveredlines>716</Uncoveredlines>
+    <Coveredlines>1496</Coveredlines>
+    <Uncoveredlines>741</Uncoveredlines>
     <Coverablelines>2237</Coverablelines>
     <Totallines>4181</Totallines>
-    <Linecoverage>67.9</Linecoverage>
+    <Linecoverage>66.8</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
-    <Coveredmethods>229</Coveredmethods>
+    <Coveredmethods>228</Coveredmethods>
     <Totalmethods>282</Totalmethods>
-    <Methodcoverage>81.2</Methodcoverage>
+    <Methodcoverage>80.8</Methodcoverage>
   </Summary>
   <Coverage>
     <Assembly name="EditModeTests" classes="4" coverage="100" coveredlines="283" coverablelines="283" totallines="598" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="48" totalmethods="48" methodcoverage="100">
@@ -24,7 +24,7 @@
       <Class name="LeaderboardTests" coverage="100" coveredlines="33" coverablelines="33" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
       <Class name="ObjectPoolTests" coverage="100" coveredlines="35" coverablelines="35" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
     </Assembly>
-    <Assembly name="GameAssembly" classes="20" coverage="53.7" coveredlines="699" coverablelines="1300" totallines="2465" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="104" totalmethods="157" methodcoverage="66.2">
+    <Assembly name="GameAssembly" classes="20" coverage="51.8" coveredlines="674" coverablelines="1300" totallines="2465" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="103" totalmethods="157" methodcoverage="65.6">
       <Class name="Ajust" coverage="0" coveredlines="0" coverablelines="35" totallines="71" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="6" methodcoverage="0" />
       <Class name="Enemy" coverage="34" coveredlines="17" coverablelines="50" totallines="93" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="8" methodcoverage="50" />
       <Class name="FollowTarget" coverage="81.4" coveredlines="22" coverablelines="27" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
@@ -36,15 +36,15 @@
       <Class name="MusicManager" coverage="72.2" coveredlines="13" coverablelines="18" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
       <Class name="ObjectPool" coverage="100" coveredlines="29" coverablelines="29" totallines="50" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
       <Class name="OptionsMenuController" coverage="26.3" coveredlines="35" coverablelines="133" totallines="285" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="17" methodcoverage="47" />
-      <Class name="PlatformSpawner" coverage="71.9" coveredlines="169" coverablelines="235" totallines="416" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="12" totalmethods="14" methodcoverage="85.7" />
-      <Class name="PlatformWeights" coverage="82.3" coveredlines="14" coverablelines="17" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="PlatformSpawner" coverage="65.1" coveredlines="153" coverablelines="235" totallines="416" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="14" methodcoverage="78.5" />
+      <Class name="PlatformWeights" coverage="100" coveredlines="17" coverablelines="17" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="Player" coverage="56.2" coveredlines="76" coverablelines="135" totallines="235" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="13" methodcoverage="76.9" />
       <Class name="Rocket" coverage="9.4" coveredlines="10" coverablelines="106" totallines="156" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="5" methodcoverage="40" />
       <Class name="ScoresMenuController" coverage="23.8" coveredlines="5" coverablelines="21" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
       <Class name="SoundManager" coverage="57.1" coveredlines="8" coverablelines="14" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="5" methodcoverage="60" />
       <Class name="StoreManager" coverage="0" coveredlines="0" coverablelines="10" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
       <Class name="StoreMenuController" coverage="0" coveredlines="0" coverablelines="59" totallines="117" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="10" methodcoverage="0" />
-      <Class name="Tile" coverage="63" coveredlines="58" coverablelines="92" totallines="150" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="8" methodcoverage="75" />
+      <Class name="Tile" coverage="50" coveredlines="46" coverablelines="92" totallines="150" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="8" methodcoverage="75" />
     </Assembly>
     <Assembly name="PlayModeTests" classes="8" coverage="82.4" coveredlines="539" coverablelines="654" totallines="1118" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="77" totalmethods="77" methodcoverage="100">
       <Class name="GameManagerTests" coverage="95.4" coveredlines="63" coverablelines="66" totallines="133" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="9" methodcoverage="100" />
