@@ -20,18 +20,14 @@ public class LeaderboardManagerTests
     [SetUp]
     public void SetUp()
     {
-        PlayerPrefs.DeleteKey("current_player_name");
-        PlayerPrefs.DeleteKey("leaderboard_v2");
-        PlayerPrefs.DeleteKey("BestScore");
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
     }
 
     [TearDown]
     public void TearDown()
     {
-        PlayerPrefs.DeleteKey("current_player_name");
-        PlayerPrefs.DeleteKey("leaderboard_v2");
-        PlayerPrefs.DeleteKey("BestScore");
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
     }
 
