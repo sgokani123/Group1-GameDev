@@ -26,16 +26,19 @@ public class GameManager : MonoBehaviour
 
     // ─── HUD Text ─────────────────────────────────────────────
     [Header("HUD")]
-    public TextMeshProUGUI scoreText;       // Shows live score during play
+    public TextMeshProUGUI scoreText;         // Shows live score during play
+    public TextMeshProUGUI hudLoggedInText;   // "Logged in as: Name" shown in-game
 
     // ─── Game Over Text ───────────────────────────────────────
     [Header("Game Over Screen")]
-    public TextMeshProUGUI finalScoreText;  // Score at end
-    public TextMeshProUGUI highScoreText;   // All-time best
+    public TextMeshProUGUI finalScoreText;      // Score at end
+    public TextMeshProUGUI highScoreText;       // All-time best
+    public TextMeshProUGUI gameOverStatusText;  // "New Personal Best!", "New #1!" etc.
 
     // ─── Main Menu Text ───────────────────────────────────────
     [Header("Menu / Scores")]
     public TextMeshProUGUI menuHighScoreText;    // Best score shown on menu (optional)
+    public TextMeshProUGUI menuLoggedInText;     // "Playing as: Name" shown on main menu
     public TextMeshProUGUI scoresHighScoreText;  // Best score shown on scores page (optional)
 
     // ─── Scene References ─────────────────────────────────────
@@ -47,12 +50,14 @@ public class GameManager : MonoBehaviour
     [Header("Menu Controllers")]
     public OptionsMenuController optionsMenuController;
     public ScoresMenuController scoresMenuController;
+    public StoreMenuController storeMenuController;
 
     // ─── Private ──────────────────────────────────────────────
     [Header("Start Position")]
     public Vector3 playerStartPosition = new Vector3(0f, 1f, 0f); // Set just above platform_0 in Inspector
     private float score;
     private float highScore;
+    private bool optionsOpenedFromPause = false;
 
 
 
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
 
         // Activate player first so its Awake/Start can run
         if (player != null) player.gameObject.SetActive(true);
+        ApplyCharacterSkin();
 
         // Reset platforms starting from just below the player start
         if (platformSpawner != null)
@@ -123,6 +129,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
             player.ResetPlayer(playerStartPosition);
 
+        RefreshLoggedInLabels();
         SetPanels(menu: false, hud: true, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
 
@@ -145,22 +152,63 @@ public class GameManager : MonoBehaviour
         // Final score (int)
         int finalScoreInt = Mathf.FloorToInt(score * 10);
 
-        // Save/update this player's best score (only if a name is set)
+        // Personal best = PlayerPrefs (independent of leaderboard position)
+        int prevPersonalBest = PlayerPrefs.GetInt("BestScore", 0);
+        int prevGlobalBest   = LeaderboardManager.GetGlobalBest();
+
+        // Submit this run to the top-10 (same player can appear multiple times)
         LeaderboardManager.SubmitScore(finalScoreInt);
 
-        // Player best + global best
-        int playerBest = LeaderboardManager.GetBestForCurrentPlayer();
-        int globalBest = LeaderboardManager.GetGlobalBest();
+        // Update personal best PlayerPref
+        int savedBest = finalScoreInt > prevPersonalBest ? finalScoreInt : prevPersonalBest;
+        if (finalScoreInt > prevPersonalBest)
+        {
+            PlayerPrefs.SetInt("BestScore", finalScoreInt);
+            PlayerPrefs.Save();
+        }
 
-        // Keep your existing "highScore" float in sync (used elsewhere for menu BEST)
-        highScore = globalBest / 10f;
+        // Post-submit state
+        int newRank      = LeaderboardManager.GetRankForCurrentPlayer(); // best rank for this player
+        int newGlobalBest = LeaderboardManager.GetGlobalBest();
+        int displayBest  = savedBest;
+
+        // Build status message
+        bool isNewPersonal = finalScoreInt > prevPersonalBest;
+        bool isNewGlobal   = newRank == 1 && finalScoreInt >= newGlobalBest;
+
+        string statusMsg = "";
+        if (isNewGlobal)
+            statusMsg = "NEW #1 HIGH SCORE!";
+        else if (newRank > 0 && isNewPersonal)
+            statusMsg = "NEW PERSONAL BEST!  Rank #" + newRank;
+        else if (newRank > 0)
+            statusMsg = "Rank #" + newRank + "!";  
+        else if (isNewPersonal)
+            statusMsg = "NEW PERSONAL BEST!";
+
+        if (gameOverStatusText != null)
+        {
+            gameOverStatusText.text = statusMsg;
+            gameOverStatusText.gameObject.SetActive(statusMsg.Length > 0);
+        }
+
+        // Keep highScore float in sync
+        highScore = (newGlobalBest > 0 ? newGlobalBest : savedBest) / 10f;
 
         if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
-        if (highScoreText != null) highScoreText.text = "YOUR HIGH SCORE: " + playerBest;
+        if (highScoreText  != null) highScoreText.text  = "HIGHEST SCORE: " + displayBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
         if (player != null) player.gameObject.SetActive(false);
+    }
+
+    /// Applies the stored character skin to the player's SpriteRenderer.
+    public void ApplyCharacterSkin()
+    {
+        if (player == null || storeMenuController == null) return;
+        var sprite = storeMenuController.GetSelectedCharacterSprite();
+        if (sprite != null) player.ApplySkin(sprite);
     }
 
     /// Called by the "Retry" button on the game over screen
@@ -196,6 +244,7 @@ public class GameManager : MonoBehaviour
         if (menuHighScoreText != null)
             menuHighScoreText.text = "BEST: " + LeaderboardManager.GetGlobalBest();
 
+        RefreshLoggedInLabels();
         SetPanels(menu: true, hud: false, pause: false, gameOver: false, options: false, scores: false, store: false);
     }
 
@@ -206,12 +255,49 @@ public class GameManager : MonoBehaviour
         // click sound
         if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
 
+        optionsOpenedFromPause = false;
         State = GameState.Options;
         Time.timeScale = 1f;
         SetPanels(menu: false, hud: false, pause: false, gameOver: false, options: true, scores: false, store: false);
 
         if (optionsMenuController != null)
             optionsMenuController.SyncFromSaved();
+    }
+
+    /// <summary>Opens Options from the Pause screen — game stays paused, back returns to pause.</summary>
+    public void ShowOptionsFromPause()
+    {
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        optionsOpenedFromPause = true;
+        State = GameState.Options;
+        // Keep timeScale = 0 so the game stays paused
+        if (optionsPanel  != null) optionsPanel.SetActive(true);
+        if (pausePanel    != null) pausePanel.SetActive(false);
+        if (hudPanel      != null) hudPanel.SetActive(false);
+
+        if (optionsMenuController != null)
+            optionsMenuController.SyncFromSaved();
+    }
+
+    /// <summary>Called by the MenuButton inside OptionsPanel. Returns to pause if that's where we came from.</summary>
+    public void CloseOptions()
+    {
+        if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(0);
+
+        if (optionsOpenedFromPause)
+        {
+            optionsOpenedFromPause = false;
+            State = GameState.Paused;
+            // Time stays at 0 — still paused
+            if (optionsPanel != null) optionsPanel.SetActive(false);
+            if (pausePanel   != null) pausePanel.SetActive(true);
+            if (hudPanel     != null) hudPanel.SetActive(true);
+        }
+        else
+        {
+            ShowMenu();
+        }
     }
 
     public void ShowScores()
@@ -272,7 +358,13 @@ public class GameManager : MonoBehaviour
     }
 
     // ─── Helpers ─────────────────────────────────────────────
-
+    /// <summary>Updates the "Logged in as" labels in both HUD and main menu.</summary>
+    public void RefreshLoggedInLabels()
+    {
+        string name = LeaderboardManager.GetCurrentPlayerName();
+        if (hudLoggedInText  != null) hudLoggedInText.text  = "Playing as: " + name;
+        if (menuLoggedInText != null) menuLoggedInText.text = "Playing as: " + name;
+    }
     void SetPanels(bool menu, bool hud, bool pause, bool gameOver, bool options, bool scores, bool store)
     {
         if (menuPanel != null) menuPanel.SetActive(menu);
