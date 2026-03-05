@@ -1,39 +1,39 @@
 {
   "summary": {
-    "generatedon": "2026-03-05T09:23:05Z",
+    "generatedon": "2026-03-05T10:15:10Z",
     "parser": "MultiReportParser (4x OpenCoverParser)",
     "assemblies": 3,
     "classes": 32,
     "files": 32,
-    "coveredlines": 840,
-    "uncoveredlines": 1268,
-    "coverablelines": 2108,
-    "totallines": 4150,
-    "linecoverage": 39.8,
+    "coveredlines": 1153,
+    "uncoveredlines": 994,
+    "coverablelines": 2147,
+    "totallines": 4156,
+    "linecoverage": 53.7,
     "coveredbranches": 0,
     "totalbranches": 0,
-    "coveredmethods": 129,
-    "totalmethods": 266,
-    "methodcoverage": 48.4
+    "coveredmethods": 194,
+    "totalmethods": 281,
+    "methodcoverage": 69
  },
   "coverage": {
     "assemblies": [
-      { "name": "EditModeTests", "classes": 4, "coverage": 4.6, "coveredlines": 13, "coverablelines": 279, "totallines": 592, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 8.1, "coveredmethods": 4, "totalmethods": 49, "classesinassembly": [
-        { "name": "GameLogicTests", "coverage": 0, "coveredlines": 0, "coverablelines": 116, "totallines": 234, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 20 },
-        { "name": "LeaderboardManagerTests", "coverage": 13.6, "coveredlines": 13, "coverablelines": 95, "totallines": 198, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 22.2, "coveredmethods": 4, "totalmethods": 18 },
-        { "name": "LeaderboardTests", "coverage": 0, "coveredlines": 0, "coverablelines": 33, "totallines": 75, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
-        { "name": "ObjectPoolTests", "coverage": 0, "coveredlines": 0, "coverablelines": 35, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 } ] },
-      { "name": "GameAssembly", "classes": 20, "coverage": 37.3, "coveredlines": 486, "coverablelines": 1300, "totallines": 2465, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 52.8, "coveredmethods": 83, "totalmethods": 157, "classesinassembly": [
+      { "name": "EditModeTests", "classes": 4, "coverage": 88.9, "coveredlines": 283, "coverablelines": 318, "totallines": 598, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 64, "totalmethods": 64, "classesinassembly": [
+        { "name": "GameLogicTests", "coverage": 100, "coveredlines": 116, "coverablelines": 116, "totallines": 234, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 20, "totalmethods": 20 },
+        { "name": "LeaderboardManagerTests", "coverage": 73.8, "coveredlines": 99, "coverablelines": 134, "totallines": 204, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 33, "totalmethods": 33 },
+        { "name": "LeaderboardTests", "coverage": 100, "coveredlines": 33, "coverablelines": 33, "totallines": 75, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
+        { "name": "ObjectPoolTests", "coverage": 100, "coveredlines": 35, "coverablelines": 35, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 } ] },
+      { "name": "GameAssembly", "classes": 20, "coverage": 40.6, "coveredlines": 529, "coverablelines": 1300, "totallines": 2465, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 56, "coveredmethods": 88, "totalmethods": 157, "classesinassembly": [
         { "name": "Ajust", "coverage": 0, "coveredlines": 0, "coverablelines": 35, "totallines": 71, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
         { "name": "Enemy", "coverage": 0, "coveredlines": 0, "coverablelines": 50, "totallines": 93, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 },
         { "name": "FollowTarget", "coverage": 81.4, "coveredlines": 22, "coverablelines": 27, "totallines": 52, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
         { "name": "GameManager", "coverage": 70.7, "coveredlines": 143, "coverablelines": 202, "totallines": 393, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.7, "coveredmethods": 18, "totalmethods": 21 },
         { "name": "KeyBindings", "coverage": 90, "coveredlines": 18, "coverablelines": 20, "totallines": 47, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 71.4, "coveredmethods": 5, "totalmethods": 7 },
-        { "name": "LeaderboardManager", "coverage": 58.6, "coveredlines": 44, "coverablelines": 75, "totallines": 149, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 66.6, "coveredmethods": 8, "totalmethods": 12 },
+        { "name": "LeaderboardManager", "coverage": 94.6, "coveredlines": 71, "coverablelines": 75, "totallines": 149, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 12, "totalmethods": 12 },
         { "name": "LeaderboardRow", "coverage": 0, "coveredlines": 0, "coverablelines": 17, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "MonoSingleton[T]", "coverage": 100, "coveredlines": 5, "coverablelines": 5, "totallines": 24, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
         { "name": "MusicManager", "coverage": 38.8, "coveredlines": 7, "coverablelines": 18, "totallines": 39, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 75, "coveredmethods": 3, "totalmethods": 4 },
-        { "name": "ObjectPool", "coverage": 44.8, "coveredlines": 13, "coverablelines": 29, "totallines": 50, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 80, "coveredmethods": 4, "totalmethods": 5 },
+        { "name": "ObjectPool", "coverage": 100, "coveredlines": 29, "coverablelines": 29, "totallines": 50, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
         { "name": "OptionsMenuController", "coverage": 26.3, "coveredlines": 35, "coverablelines": 133, "totallines": 285, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 47, "coveredmethods": 8, "totalmethods": 17 },
         { "name": "PlatformSpawner", "coverage": 38.2, "coveredlines": 90, "coverablelines": 235, "totallines": 416, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 64.2, "coveredmethods": 9, "totalmethods": 14 },
         { "name": "PlatformWeights", "coverage": 100, "coveredlines": 17, "coverablelines": 17, "totallines": 62, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },

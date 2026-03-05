@@ -1,40 +1,40 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 09:23:05 |
+| Generated on: | 05/03/2026 - 10:15:10 |
 | Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 840 |
-| Uncovered lines: | 1268 |
-| Coverable lines: | 2108 |
-| Total lines: | 4150 |
-| Line coverage: | 39.8% (840 of 2108) |
+| Covered lines: | 1153 |
+| Uncovered lines: | 994 |
+| Coverable lines: | 2147 |
+| Total lines: | 4156 |
+| Line coverage: | 53.7% (1153 of 2147) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
-| Covered methods: | 129 |
-| Total methods: | 266 |
-| Method coverage: | 48.4% (129 of 266) |
+| Covered methods: | 194 |
+| Total methods: | 281 |
+| Method coverage: | 69% (194 of 281) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|**EditModeTests**|**13**|**266**|**279**|**592**|**4.6%**|**0**|**0**|****|**4**|**49**|**8.1%**|
-|GameLogicTests|0|116|116|234|0%|0|0||0|20|0%|
-|LeaderboardManagerTests|13|82|95|198|13.6%|0|0||4|18|22.2%|
-|LeaderboardTests|0|33|33|75|0%|0|0||0|5|0%|
-|ObjectPoolTests|0|35|35|85|0%|0|0||0|6|0%|
-|**GameAssembly**|**486**|**814**|**1300**|**2465**|**37.3%**|**0**|**0**|****|**83**|**157**|**52.8%**|
+|**EditModeTests**|**283**|**35**|**318**|**598**|**88.9%**|**0**|**0**|****|**64**|**64**|**100%**|
+|GameLogicTests|116|0|116|234|100%|0|0||20|20|100%|
+|LeaderboardManagerTests|99|35|134|204|73.8%|0|0||33|33|100%|
+|LeaderboardTests|33|0|33|75|100%|0|0||5|5|100%|
+|ObjectPoolTests|35|0|35|85|100%|0|0||6|6|100%|
+|**GameAssembly**|**529**|**771**|**1300**|**2465**|**40.6%**|**0**|**0**|****|**88**|**157**|**56%**|
 |Ajust|0|35|35|71|0%|0|0||0|6|0%|
 |Enemy|0|50|50|93|0%|0|0||0|8|0%|
 |FollowTarget|22|5|27|52|81.4%|0|0||6|6|100%|
 |GameManager|143|59|202|393|70.7%|0|0||18|21|85.7%|
 |KeyBindings|18|2|20|47|90%|0|0||5|7|71.4%|
-|LeaderboardManager|44|31|75|149|58.6%|0|0||8|12|66.6%|
+|LeaderboardManager|71|4|75|149|94.6%|0|0||12|12|100%|
 |LeaderboardRow|0|17|17|33|0%|0|0||0|3|0%|
 |MonoSingleton[T]|5|0|5|24|100%|0|0||3|3|100%|
 |MusicManager|7|11|18|39|38.8%|0|0||3|4|75%|
-|ObjectPool|13|16|29|50|44.8%|0|0||4|5|80%|
+|ObjectPool|29|0|29|50|100%|0|0||5|5|100%|
 |OptionsMenuController|35|98|133|285|26.3%|0|0||8|17|47%|
 |PlatformSpawner|90|145|235|416|38.2%|0|0||9|14|64.2%|
 |PlatformWeights|17|0|17|62|100%|0|0||3|3|100%|
