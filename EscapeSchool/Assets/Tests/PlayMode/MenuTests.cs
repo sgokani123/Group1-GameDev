@@ -67,10 +67,22 @@ public class MenuTests
         platformPrefab.AddComponent<Tile>();
         platformPrefab.AddComponent<BoxCollider2D>();
         
+        // Create mock enemy prefab
+        var enemyPrefab = new GameObject("EnemyPrefab");
+        enemyPrefab.AddComponent<Enemy>();
+        
+        // Create mock rocket prefab
+        var rocketPrefab = new GameObject("RocketPrefab");
+        rocketPrefab.AddComponent<Rocket>();
+        
         var spawnerObj = new GameObject("PlatformSpawner");
         gameManager.platformSpawner = spawnerObj.AddComponent<PlatformSpawner>();
         gameManager.platformSpawner.platformPrefab = platformPrefab;
+        gameManager.platformSpawner.enemyPrefab = enemyPrefab;
+        gameManager.platformSpawner.rocketPrefab = rocketPrefab;
         gameManager.platformSpawner.prewarmPoolCount = 0; // Don't prewarm to avoid instantiation
+        gameManager.platformSpawner.rocketSpawnChance = 0f; // Disable rocket spawning
+        gameManager.platformSpawner.gapEnemyMaxChance = 0f; // Disable enemy spawning
         
         var cameraObj = new GameObject("Camera");
         cameraObj.tag = "MainCamera";
@@ -91,6 +103,8 @@ public class MenuTests
         
         // Cleanup
         Object.DestroyImmediate(platformPrefab);
+        Object.DestroyImmediate(enemyPrefab);
+        Object.DestroyImmediate(rocketPrefab);
     }
 
     [Test]
