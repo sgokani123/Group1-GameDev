@@ -1,30 +1,30 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 10:15:10 |
+| Generated on: | 05/03/2026 - 10:19:36 |
 | Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 1153 |
-| Uncovered lines: | 994 |
-| Coverable lines: | 2147 |
+| Covered lines: | 1161 |
+| Uncovered lines: | 951 |
+| Coverable lines: | 2112 |
 | Total lines: | 4156 |
-| Line coverage: | 53.7% (1153 of 2147) |
+| Line coverage: | 54.9% (1161 of 2112) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
-| Covered methods: | 194 |
-| Total methods: | 281 |
-| Method coverage: | 69% (194 of 281) |
+| Covered methods: | 178 |
+| Total methods: | 265 |
+| Method coverage: | 67.1% (178 of 265) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|**EditModeTests**|**283**|**35**|**318**|**598**|**88.9%**|**0**|**0**|****|**64**|**64**|**100%**|
+|**EditModeTests**|**283**|**0**|**283**|**598**|**100%**|**0**|**0**|****|**48**|**48**|**100%**|
 |GameLogicTests|116|0|116|234|100%|0|0||20|20|100%|
-|LeaderboardManagerTests|99|35|134|204|73.8%|0|0||33|33|100%|
+|LeaderboardManagerTests|99|0|99|204|100%|0|0||17|17|100%|
 |LeaderboardTests|33|0|33|75|100%|0|0||5|5|100%|
 |ObjectPoolTests|35|0|35|85|100%|0|0||6|6|100%|
-|**GameAssembly**|**529**|**771**|**1300**|**2465**|**40.6%**|**0**|**0**|****|**88**|**157**|**56%**|
+|**GameAssembly**|**537**|**763**|**1300**|**2465**|**41.3%**|**0**|**0**|****|**88**|**157**|**56%**|
 |Ajust|0|35|35|71|0%|0|0||0|6|0%|
 |Enemy|0|50|50|93|0%|0|0||0|8|0%|
 |FollowTarget|22|5|27|52|81.4%|0|0||6|6|100%|
@@ -36,8 +36,8 @@
 |MusicManager|7|11|18|39|38.8%|0|0||3|4|75%|
 |ObjectPool|29|0|29|50|100%|0|0||5|5|100%|
 |OptionsMenuController|35|98|133|285|26.3%|0|0||8|17|47%|
-|PlatformSpawner|90|145|235|416|38.2%|0|0||9|14|64.2%|
-|PlatformWeights|17|0|17|62|100%|0|0||3|3|100%|
+|PlatformSpawner|99|136|235|416|42.1%|0|0||9|14|64.2%|
+|PlatformWeights|16|1|17|62|94.1%|0|0||3|3|100%|
 |Player|74|61|135|235|54.8%|0|0||10|13|76.9%|
 |Rocket|0|106|106|156|0%|0|0||0|5|0%|
 |ScoresMenuController|5|16|21|40|23.8%|0|0||3|3|100%|
