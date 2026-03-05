@@ -82,7 +82,9 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            
+
+            if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(5);
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.GameOver();
