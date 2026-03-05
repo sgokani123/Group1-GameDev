@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour
 
     // ─── Game Over Text ───────────────────────────────────────
     [Header("Game Over Screen")]
-    public TextMeshProUGUI finalScoreText;  // Score at end
-    public TextMeshProUGUI highScoreText;   // All-time best
+    public TextMeshProUGUI finalScoreText;      // Score at end
+    public TextMeshProUGUI highScoreText;       // All-time best
+    public TextMeshProUGUI gameOverStatusText;  // "New Personal Best!", "New #1!" etc.
 
     // ─── Main Menu Text ───────────────────────────────────────
     [Header("Menu / Scores")]
@@ -149,29 +150,51 @@ public class GameManager : MonoBehaviour
         // Final score (int)
         int finalScoreInt = Mathf.FloorToInt(score * 10);
 
-        // Save/update this player's best score (only if a name is set)
+        // Personal best = PlayerPrefs (independent of leaderboard position)
+        int prevPersonalBest = PlayerPrefs.GetInt("BestScore", 0);
+        int prevGlobalBest   = LeaderboardManager.GetGlobalBest();
+
+        // Submit this run to the top-10 (same player can appear multiple times)
         LeaderboardManager.SubmitScore(finalScoreInt);
 
-        // Always persist a simple best score regardless of whether a name is set
-        int savedBest = PlayerPrefs.GetInt("BestScore", 0);
-        if (finalScoreInt > savedBest)
+        // Update personal best PlayerPref
+        int savedBest = finalScoreInt > prevPersonalBest ? finalScoreInt : prevPersonalBest;
+        if (finalScoreInt > prevPersonalBest)
         {
-            savedBest = finalScoreInt;
-            PlayerPrefs.SetInt("BestScore", savedBest);
+            PlayerPrefs.SetInt("BestScore", finalScoreInt);
             PlayerPrefs.Save();
         }
 
-        // Player best + global best
-        int playerBest = LeaderboardManager.GetBestForCurrentPlayer();
-        // Use leaderboard best when a name is set, otherwise fall back to the anonymous best
-        int displayBest = playerBest > 0 ? playerBest : savedBest;
-        int globalBest = LeaderboardManager.GetGlobalBest();
+        // Post-submit state
+        int newRank      = LeaderboardManager.GetRankForCurrentPlayer(); // best rank for this player
+        int newGlobalBest = LeaderboardManager.GetGlobalBest();
+        int displayBest  = savedBest;
 
-        // Keep your existing "highScore" float in sync (used elsewhere for menu BEST)
-        highScore = (globalBest > 0 ? globalBest : savedBest) / 10f;
+        // Build status message
+        bool isNewPersonal = finalScoreInt > prevPersonalBest;
+        bool isNewGlobal   = newRank == 1 && finalScoreInt >= newGlobalBest;
+
+        string statusMsg = "";
+        if (isNewGlobal)
+            statusMsg = "NEW #1 HIGH SCORE!";
+        else if (newRank > 0 && isNewPersonal)
+            statusMsg = "NEW PERSONAL BEST!  Rank #" + newRank;
+        else if (newRank > 0)
+            statusMsg = "Rank #" + newRank + "!";  
+        else if (isNewPersonal)
+            statusMsg = "NEW PERSONAL BEST!";
+
+        if (gameOverStatusText != null)
+        {
+            gameOverStatusText.text = statusMsg;
+            gameOverStatusText.gameObject.SetActive(statusMsg.Length > 0);
+        }
+
+        // Keep highScore float in sync
+        highScore = (newGlobalBest > 0 ? newGlobalBest : savedBest) / 10f;
 
         if (finalScoreText != null) finalScoreText.text = "YOUR SCORE: " + finalScoreInt;
-        if (highScoreText  != null) highScoreText.text  = "YOUR HIGH SCORE: " + displayBest;
+        if (highScoreText  != null) highScoreText.text  = "HIGHEST SCORE: " + displayBest;
 
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
@@ -329,7 +352,7 @@ public class GameManager : MonoBehaviour
     public void RefreshLoggedInLabels()
     {
         string name = LeaderboardManager.GetCurrentPlayerName();
-        if (hudLoggedInText  != null) hudLoggedInText.text  = "Logged in as: " + name;
+        if (hudLoggedInText  != null) hudLoggedInText.text  = "Playing as: " + name;
         if (menuLoggedInText != null) menuLoggedInText.text = "Playing as: " + name;
     }
     void SetPanels(bool menu, bool hud, bool pause, bool gameOver, bool options, bool scores, bool store)

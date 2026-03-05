@@ -11,7 +11,6 @@ public class OptionsMenuController : MonoBehaviour
     // ── Name ────────────────────────────────────────────────────────────────
     [Header("UI - Name")]
     public TMP_InputField nameInput;
-    public TMP_Text currentNameLabel;
     [Tooltip("Label that shows validation errors in red. Optional.")]
     public TMP_Text nameValidationLabel;
 
@@ -93,13 +92,11 @@ public class OptionsMenuController : MonoBehaviour
 
     public void SyncFromSaved()
     {
-        string current = LeaderboardManager.GetCurrentPlayerName(); // returns "Anonymous" if not set
+        string current = LeaderboardManager.GetCurrentPlayerName(); // always at least "Anonymous"
 
+        // Pre-fill the input with the current name so the user can edit it directly
         if (nameInput != null)
-            nameInput.SetTextWithoutNotify(current == LeaderboardManager.DefaultName ? "" : current);
-
-        if (currentNameLabel != null)
-            currentNameLabel.text = "Logged in as: " + current;
+            nameInput.SetTextWithoutNotify(current);
 
         if (nameValidationLabel != null)
             nameValidationLabel.gameObject.SetActive(false);
@@ -279,9 +276,6 @@ public class OptionsMenuController : MonoBehaviour
 
     private void ApplyFontSizes()
     {
-        if (currentNameLabel != null)
-            currentNameLabel.fontSize = optionFontSize;
-
         if (nameInput != null && nameInput.textComponent != null)
             nameInput.textComponent.fontSize = optionFontSize;
 
