@@ -64,7 +64,7 @@ public class OptionsMenuController : MonoBehaviour
     {
         ApplyFontSizes();
 
-        backgroundAjust = FindObjectOfType<Ajust>();
+        backgroundAjust = FindAnyObjectByType<Ajust>();
         if (backgroundAjust != null)
         {
             prevFollowCamera = backgroundAjust.followCamera;
@@ -170,7 +170,7 @@ public class OptionsMenuController : MonoBehaviour
 
         // Also apply immediately if Player is already active in the scene (in-game options)
         // includeInactive:true so we find it even when it's disabled
-        Player player = FindObjectOfType<Player>(true);
+        Player player = FindAnyObjectByType<Player>(FindObjectsInactive.Include);
         if (player != null) player.SetSpeedFromSlider(value);
 
         if (speedValueLabel != null) speedValueLabel.text = Mathf.RoundToInt(value).ToString();
