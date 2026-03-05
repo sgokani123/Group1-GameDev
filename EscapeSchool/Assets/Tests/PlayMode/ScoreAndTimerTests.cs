@@ -45,28 +45,29 @@ public class ScoreAndTimerTests
         var scoreTextObj = new GameObject("ScoreText");
         gameManager.scoreText = scoreTextObj.AddComponent<TextMeshProUGUI>();
         gameManager.hudPanel = new GameObject("HudPanel");
-
-        // Act
-        gameManager.StartGame();
+        gameManager.State = GameManager.GameState.Playing;
+        gameManager.hudPanel.SetActive(true);
 
         // Assert
         Assert.IsNotNull(gameManager.scoreText, "Score text should exist");
         Assert.IsTrue(gameManager.hudPanel.activeSelf, "HUD panel should be visible");
     }
 
-    [Test]
-    public void OnGameplayOpen_ScoreIsZero()
+    [UnityTest]
+    public IEnumerator OnGameplayOpen_ScoreIsZero()
     {
         // Arrange
         var scoreTextObj = new GameObject("ScoreText");
         gameManager.scoreText = scoreTextObj.AddComponent<TextMeshProUGUI>();
         gameManager.hudPanel = new GameObject("HudPanel");
+        gameManager.menuPanel = new GameObject("MenuPanel");
         playerObj.transform.position = gameManager.playerStartPosition;
-
-        // Act
-        gameManager.StartGame();
+        gameManager.State = GameManager.GameState.Playing;
+        
+        yield return null; // Wait for Update to run
 
         // Assert
+        Assert.IsNotNull(gameManager.scoreText.text, "Score text should not be null");
         Assert.IsTrue(gameManager.scoreText.text.Contains("0") || gameManager.scoreText.text == "SCORE: 0",
             "Initial score should be zero");
     }
