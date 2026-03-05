@@ -19,7 +19,10 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void SetMuted(bool muted)
     {
-        AudioListener.volume = muted ? 0f : 1f;    }
+        AudioListener.volume = muted ? 0f : 1f;
+        PlayerPrefs.SetInt("SoundMuted", muted ? 1 : 0);
+        PlayerPrefs.Save();
+    }
 
     public void PlaySFX(int id)
     {

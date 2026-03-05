@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     // ─── State ───────────────────────────────────────────────
     public enum GameState { Menu, Playing, Paused, GameOver, Options, Scores, Store }
-    public GameState State { get; private set; } = GameState.Menu;
+    public GameState State { get; set; } = GameState.Menu;
 
     // ─── UI Panels ────────────────────────────────────────────
     [Header("UI Panels")]

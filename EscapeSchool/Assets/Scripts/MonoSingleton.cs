@@ -13,12 +13,8 @@ public abstract class MonoSingleton<T> : MonoBehaviour
 
     public static T Instance
     {
-        get
-        {
-            return m_instance;
-        }
-
-
+        get { return m_instance; }
+        set { m_instance = value; }
     }
 
     protected virtual void Awake()
