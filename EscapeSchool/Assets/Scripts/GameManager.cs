@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     [Header("Menu Controllers")]
     public OptionsMenuController optionsMenuController;
     public ScoresMenuController scoresMenuController;
+    public StoreMenuController storeMenuController;
 
     // ─── Private ──────────────────────────────────────────────
     [Header("Start Position")]
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour
 
         // Activate player first so its Awake/Start can run
         if (player != null) player.gameObject.SetActive(true);
+        ApplyCharacterSkin();
 
         // Reset platforms starting from just below the player start
         if (platformSpawner != null)
@@ -199,6 +201,14 @@ public class GameManager : MonoBehaviour
         SetPanels(menu: false, hud: false, pause: false, gameOver: true, options: false, scores: false, store: false);
 
         if (player != null) player.gameObject.SetActive(false);
+    }
+
+    /// Applies the stored character skin to the player's SpriteRenderer.
+    public void ApplyCharacterSkin()
+    {
+        if (player == null || storeMenuController == null) return;
+        var sprite = storeMenuController.GetSelectedCharacterSprite();
+        if (sprite != null) player.ApplySkin(sprite);
     }
 
     /// Called by the "Retry" button on the game over screen

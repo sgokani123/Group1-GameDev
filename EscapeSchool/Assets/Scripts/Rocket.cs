@@ -12,6 +12,25 @@ public class Rocket : MonoBehaviour
     private bool isUsed = false;
     private float originalGravity = 1f;
 
+    void Awake()
+    {
+        if (GameManager.Instance?.storeMenuController == null) return;
+        var sprite = GameManager.Instance.storeMenuController.GetSelectedRocketSprite();
+        if (sprite == null) return;
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null || sr.sprite == null) return;
+
+        // Normalise scale so the rocket stays the same world size
+        Sprite orig = sr.sprite;
+        float origW = orig.rect.width  / orig.pixelsPerUnit;
+        float origH = orig.rect.height / orig.pixelsPerUnit;
+        float scaleX = origW / (sprite.rect.width  / sprite.pixelsPerUnit);
+        float scaleY = origH / (sprite.rect.height / sprite.pixelsPerUnit);
+        sr.sprite = sprite;
+        Vector3 s = transform.localScale;
+        transform.localScale = new Vector3(s.x * scaleX, s.y * scaleY, s.z);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isUsed || !collision.CompareTag("Player")) return;
