@@ -1,0 +1,57 @@
+{
+  "summary": {
+    "generatedon": "2026-03-05T09:04:34Z",
+    "parser": "MultiReportParser (2x OpenCoverParser)",
+    "assemblies": 3,
+    "classes": 32,
+    "files": 32,
+    "coveredlines": 827,
+    "uncoveredlines": 1281,
+    "coverablelines": 2108,
+    "totallines": 4150,
+    "linecoverage": 39.2,
+    "coveredbranches": 0,
+    "totalbranches": 0,
+    "coveredmethods": 125,
+    "totalmethods": 265,
+    "methodcoverage": 47.1
+ },
+  "coverage": {
+    "assemblies": [
+      { "name": "EditModeTests", "classes": 4, "coverage": 0, "coveredlines": 0, "coverablelines": 279, "totallines": 592, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 48, "classesinassembly": [
+        { "name": "GameLogicTests", "coverage": 0, "coveredlines": 0, "coverablelines": 116, "totallines": 234, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 20 },
+        { "name": "LeaderboardManagerTests", "coverage": 0, "coveredlines": 0, "coverablelines": 95, "totallines": 198, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 17 },
+        { "name": "LeaderboardTests", "coverage": 0, "coveredlines": 0, "coverablelines": 33, "totallines": 75, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
+        { "name": "ObjectPoolTests", "coverage": 0, "coveredlines": 0, "coverablelines": 35, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 } ] },
+      { "name": "GameAssembly", "classes": 20, "coverage": 37.3, "coveredlines": 486, "coverablelines": 1300, "totallines": 2465, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 52.8, "coveredmethods": 83, "totalmethods": 157, "classesinassembly": [
+        { "name": "Ajust", "coverage": 0, "coveredlines": 0, "coverablelines": 35, "totallines": 71, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
+        { "name": "Enemy", "coverage": 0, "coveredlines": 0, "coverablelines": 50, "totallines": 93, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 8 },
+        { "name": "FollowTarget", "coverage": 81.4, "coveredlines": 22, "coverablelines": 27, "totallines": 52, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
+        { "name": "GameManager", "coverage": 70.7, "coveredlines": 143, "coverablelines": 202, "totallines": 393, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 85.7, "coveredmethods": 18, "totalmethods": 21 },
+        { "name": "KeyBindings", "coverage": 90, "coveredlines": 18, "coverablelines": 20, "totallines": 47, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 71.4, "coveredmethods": 5, "totalmethods": 7 },
+        { "name": "LeaderboardManager", "coverage": 58.6, "coveredlines": 44, "coverablelines": 75, "totallines": 149, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 66.6, "coveredmethods": 8, "totalmethods": 12 },
+        { "name": "LeaderboardRow", "coverage": 0, "coveredlines": 0, "coverablelines": 17, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "MonoSingleton[T]", "coverage": 100, "coveredlines": 5, "coverablelines": 5, "totallines": 24, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "MusicManager", "coverage": 38.8, "coveredlines": 7, "coverablelines": 18, "totallines": 39, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 75, "coveredmethods": 3, "totalmethods": 4 },
+        { "name": "ObjectPool", "coverage": 44.8, "coveredlines": 13, "coverablelines": 29, "totallines": 50, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 80, "coveredmethods": 4, "totalmethods": 5 },
+        { "name": "OptionsMenuController", "coverage": 26.3, "coveredlines": 35, "coverablelines": 133, "totallines": 285, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 47, "coveredmethods": 8, "totalmethods": 17 },
+        { "name": "PlatformSpawner", "coverage": 38.2, "coveredlines": 90, "coverablelines": 235, "totallines": 416, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 64.2, "coveredmethods": 9, "totalmethods": 14 },
+        { "name": "PlatformWeights", "coverage": 100, "coveredlines": 17, "coverablelines": 17, "totallines": 62, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "Player", "coverage": 54.8, "coveredlines": 74, "coverablelines": 135, "totallines": 235, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 76.9, "coveredmethods": 10, "totalmethods": 13 },
+        { "name": "Rocket", "coverage": 0, "coveredlines": 0, "coverablelines": 106, "totallines": 156, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
+        { "name": "ScoresMenuController", "coverage": 23.8, "coveredlines": 5, "coverablelines": 21, "totallines": 40, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
+        { "name": "SoundManager", "coverage": 35.7, "coveredlines": 5, "coverablelines": 14, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 20, "coveredmethods": 1, "totalmethods": 5 },
+        { "name": "StoreManager", "coverage": 0, "coveredlines": 0, "coverablelines": 10, "totallines": 20, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
+        { "name": "StoreMenuController", "coverage": 0, "coveredlines": 0, "coverablelines": 59, "totallines": 117, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 10 },
+        { "name": "Tile", "coverage": 8.6, "coveredlines": 8, "coverablelines": 92, "totallines": 150, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 25, "coveredmethods": 2, "totalmethods": 8 } ] },
+      { "name": "PlayModeTests", "classes": 8, "coverage": 64.4, "coveredlines": 341, "coverablelines": 529, "totallines": 1093, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 70, "coveredmethods": 42, "totalmethods": 60, "classesinassembly": [
+        { "name": "GameManagerTests", "coverage": 95.4, "coveredlines": 63, "coverablelines": 66, "totallines": 133, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 9, "totalmethods": 9 },
+        { "name": "GameOverTests", "coverage": 98.6, "coveredlines": 72, "coverablelines": 73, "totallines": 160, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 8, "totalmethods": 8 },
+        { "name": "GameplayTests", "coverage": 9.4, "coveredlines": 10, "coverablelines": 106, "totallines": 207, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 20, "coveredmethods": 2, "totalmethods": 10 },
+        { "name": "MenuTests", "coverage": 91, "coveredlines": 61, "coverablelines": 67, "totallines": 126, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
+        { "name": "PlatformInteractionTests", "coverage": 100, "coveredlines": 51, "coverablelines": 51, "totallines": 103, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
+        { "name": "PlayerTests", "coverage": 62.1, "coveredlines": 23, "coverablelines": 37, "totallines": 87, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 66.6, "coveredmethods": 4, "totalmethods": 6 },
+        { "name": "ScoreAndTimerTests", "coverage": 72.7, "coveredlines": 40, "coverablelines": 55, "totallines": 114, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 83.3, "coveredmethods": 5, "totalmethods": 6 },
+        { "name": "SoundOptionsTests", "coverage": 28.3, "coveredlines": 21, "coverablelines": 74, "totallines": 163, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 22.2, "coveredmethods": 2, "totalmethods": 9 } ] } ]
+  }
+}
