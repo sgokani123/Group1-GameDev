@@ -1,26 +1,26 @@
 {
   "summary": {
-    "generatedon": "2026-03-05T09:04:34Z",
-    "parser": "MultiReportParser (2x OpenCoverParser)",
+    "generatedon": "2026-03-05T09:23:05Z",
+    "parser": "MultiReportParser (4x OpenCoverParser)",
     "assemblies": 3,
     "classes": 32,
     "files": 32,
-    "coveredlines": 827,
-    "uncoveredlines": 1281,
+    "coveredlines": 840,
+    "uncoveredlines": 1268,
     "coverablelines": 2108,
     "totallines": 4150,
-    "linecoverage": 39.2,
+    "linecoverage": 39.8,
     "coveredbranches": 0,
     "totalbranches": 0,
-    "coveredmethods": 125,
-    "totalmethods": 265,
-    "methodcoverage": 47.1
+    "coveredmethods": 129,
+    "totalmethods": 266,
+    "methodcoverage": 48.4
  },
   "coverage": {
     "assemblies": [
-      { "name": "EditModeTests", "classes": 4, "coverage": 0, "coveredlines": 0, "coverablelines": 279, "totallines": 592, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 48, "classesinassembly": [
+      { "name": "EditModeTests", "classes": 4, "coverage": 4.6, "coveredlines": 13, "coverablelines": 279, "totallines": 592, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 8.1, "coveredmethods": 4, "totalmethods": 49, "classesinassembly": [
         { "name": "GameLogicTests", "coverage": 0, "coveredlines": 0, "coverablelines": 116, "totallines": 234, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 20 },
-        { "name": "LeaderboardManagerTests", "coverage": 0, "coveredlines": 0, "coverablelines": 95, "totallines": 198, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 17 },
+        { "name": "LeaderboardManagerTests", "coverage": 13.6, "coveredlines": 13, "coverablelines": 95, "totallines": 198, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 22.2, "coveredmethods": 4, "totalmethods": 18 },
         { "name": "LeaderboardTests", "coverage": 0, "coveredlines": 0, "coverablelines": 33, "totallines": 75, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "ObjectPoolTests", "coverage": 0, "coveredlines": 0, "coverablelines": 35, "totallines": 85, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 } ] },
       { "name": "GameAssembly", "classes": 20, "coverage": 37.3, "coveredlines": 486, "coverablelines": 1300, "totallines": 2465, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 52.8, "coveredmethods": 83, "totalmethods": 157, "classesinassembly": [

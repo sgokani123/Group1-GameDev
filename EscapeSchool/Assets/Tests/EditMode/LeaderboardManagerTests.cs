@@ -39,9 +39,9 @@ public class LeaderboardManagerTests
     //      REFACTOR → helper extracted; sanitise on Set, not on Get.
 
     [Test]
-    public void GetCurrentPlayerName_WhenNoneSet_ReturnsEmpty()
+    public void GetCurrentPlayerName_WhenNoneSet_ReturnsAnonymous()
     {
-        Assert.AreEqual("", LeaderboardManager.GetCurrentPlayerName());
+        Assert.AreEqual("Anonymous", LeaderboardManager.GetCurrentPlayerName());
     }
 
     [Test]

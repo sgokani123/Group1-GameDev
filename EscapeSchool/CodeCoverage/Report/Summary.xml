@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>05/03/2026 - 09:04:34</Generatedon>
-    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Generatedon>05/03/2026 - 09:23:05</Generatedon>
+    <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
     <Assemblies>3</Assemblies>
     <Classes>32</Classes>
     <Files>32</Files>
-    <Coveredlines>827</Coveredlines>
-    <Uncoveredlines>1281</Uncoveredlines>
+    <Coveredlines>840</Coveredlines>
+    <Uncoveredlines>1268</Uncoveredlines>
     <Coverablelines>2108</Coverablelines>
     <Totallines>4150</Totallines>
-    <Linecoverage>39.2</Linecoverage>
+    <Linecoverage>39.8</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
-    <Coveredmethods>125</Coveredmethods>
-    <Totalmethods>265</Totalmethods>
-    <Methodcoverage>47.1</Methodcoverage>
+    <Coveredmethods>129</Coveredmethods>
+    <Totalmethods>266</Totalmethods>
+    <Methodcoverage>48.4</Methodcoverage>
   </Summary>
   <Coverage>
-    <Assembly name="EditModeTests" classes="4" coverage="0" coveredlines="0" coverablelines="279" totallines="592" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="48" methodcoverage="0">
+    <Assembly name="EditModeTests" classes="4" coverage="4.6" coveredlines="13" coverablelines="279" totallines="592" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="49" methodcoverage="8.1">
       <Class name="GameLogicTests" coverage="0" coveredlines="0" coverablelines="116" totallines="234" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="20" methodcoverage="0" />
-      <Class name="LeaderboardManagerTests" coverage="0" coveredlines="0" coverablelines="95" totallines="198" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="17" methodcoverage="0" />
+      <Class name="LeaderboardManagerTests" coverage="13.6" coveredlines="13" coverablelines="95" totallines="198" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="18" methodcoverage="22.2" />
       <Class name="LeaderboardTests" coverage="0" coveredlines="0" coverablelines="33" totallines="75" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
       <Class name="ObjectPoolTests" coverage="0" coveredlines="0" coverablelines="35" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="6" methodcoverage="0" />
     </Assembly>

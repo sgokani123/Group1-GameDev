@@ -1,27 +1,27 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 09:04:34 |
-| Parser: | MultiReportParser (2x OpenCoverParser) |
+| Generated on: | 05/03/2026 - 09:23:05 |
+| Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 827 |
-| Uncovered lines: | 1281 |
+| Covered lines: | 840 |
+| Uncovered lines: | 1268 |
 | Coverable lines: | 2108 |
 | Total lines: | 4150 |
-| Line coverage: | 39.2% (827 of 2108) |
+| Line coverage: | 39.8% (840 of 2108) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
-| Covered methods: | 125 |
-| Total methods: | 265 |
-| Method coverage: | 47.1% (125 of 265) |
+| Covered methods: | 129 |
+| Total methods: | 266 |
+| Method coverage: | 48.4% (129 of 266) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-|**EditModeTests**|**0**|**279**|**279**|**592**|**0%**|**0**|**0**|****|**0**|**48**|**0%**|
+|**EditModeTests**|**13**|**266**|**279**|**592**|**4.6%**|**0**|**0**|****|**4**|**49**|**8.1%**|
 |GameLogicTests|0|116|116|234|0%|0|0||0|20|0%|
-|LeaderboardManagerTests|0|95|95|198|0%|0|0||0|17|0%|
+|LeaderboardManagerTests|13|82|95|198|13.6%|0|0||4|18|22.2%|
 |LeaderboardTests|0|33|33|75|0%|0|0||0|5|0%|
 |ObjectPoolTests|0|35|35|85|0%|0|0||0|6|0%|
 |**GameAssembly**|**486**|**814**|**1300**|**2465**|**37.3%**|**0**|**0**|****|**83**|**157**|**52.8%**|

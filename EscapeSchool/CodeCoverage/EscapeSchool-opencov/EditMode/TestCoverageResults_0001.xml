@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="0.0.0.0">
+  <Summary numSequencePoints="26" visitedSequencePoints="17" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="65.38" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="2" numClasses="3" visitedMethods="4" numMethods="7" />
+  <Modules>
+    <Module>
+      <Summary numSequencePoints="13" visitedSequencePoints="13" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="3" numMethods="3" />
+      <ModuleTime>0001-01-01T00:00:00</ModuleTime>
+      <ModuleName>EditModeTests</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/GameLogicTests.cs" />
+        <File uid="2" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardManagerTests.cs" />
+        <File uid="3" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardTests.cs" />
+        <File uid="4" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/ObjectPoolTests.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="13" visitedSequencePoints="13" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="3" numMethods="3" />
+          <FullName>LeaderboardManagerTests</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="100.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.Void LeaderboardManagerTests::SetUp()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="2470" ordinal="0" offset="0" sl="22" sc="5" el="22" ec="5" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2471" ordinal="0" offset="1" sl="23" sc="9" el="23" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2472" ordinal="0" offset="12" sl="24" sc="9" el="24" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2473" ordinal="0" offset="23" sl="25" sc="9" el="25" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2474" ordinal="0" offset="29" sl="26" sc="5" el="26" ec="5" bec="0" bev="0" fileid="2" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="100.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="5" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.Void LeaderboardManagerTests::TearDown()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="2475" ordinal="0" offset="0" sl="30" sc="5" el="30" ec="5" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2476" ordinal="0" offset="1" sl="31" sc="9" el="31" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2477" ordinal="0" offset="12" sl="32" sc="9" el="32" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2478" ordinal="0" offset="23" sl="33" sc="9" el="33" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2479" ordinal="0" offset="29" sl="34" sc="5" el="34" ec="5" bec="0" bev="0" fileid="2" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="100.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Void LeaderboardManagerTests::GetCurrentPlayerName_WhenNoneSet_ReturnsAnonymous()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="2480" ordinal="0" offset="0" sl="43" sc="5" el="43" ec="5" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2481" ordinal="0" offset="1" sl="44" sc="9" el="44" ec="9" bec="0" bev="0" fileid="2" />
+                <SequencePoint vc="1" uspid="2482" ordinal="0" offset="17" sl="45" sc="5" el="45" ec="5" bec="0" bev="0" fileid="2" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+    <Module>
+      <Summary numSequencePoints="13" visitedSequencePoints="4" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="30.77" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="2" visitedMethods="1" numMethods="4" />
+      <ModuleTime>0001-01-01T00:00:00</ModuleTime>
+      <ModuleName>GameAssembly</ModuleName>
+      <Files>
+        <File uid="5" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Ajust.cs" />
+        <File uid="6" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Enemy.cs" />
+        <File uid="7" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/FollowTarget.cs" />
+        <File uid="8" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/GameManager.cs" />
+        <File uid="9" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/KeyBindings.cs" />
+        <File uid="10" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardManager.cs" />
+        <File uid="11" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardRow.cs" />
+        <File uid="12" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/MonoSingleton.cs" />
+        <File uid="13" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Music manager.cs" />
+        <File uid="14" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ObjectPool.cs" />
+        <File uid="15" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/OptionsMenuController.cs" />
+        <File uid="16" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformSpawner.cs" />
+        <File uid="17" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformWeights.cs" />
+        <File uid="18" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Player.cs" />
+        <File uid="19" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Rocket.cs" />
+        <File uid="20" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ScoresMenuController.cs" />
+        <File uid="21" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Soundmanager.cs" />
+        <File uid="22" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreManager.cs" />
+        <File uid="23" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreMenuController.cs" />
+        <File uid="24" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Tile.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="4" visitedSequencePoints="4" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
+          <FullName>LeaderboardManager</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="100.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="4" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="100.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="1" numMethods="1" />
+              <MetadataToken>100663345</MetadataToken>
+              <Name>static System.String LeaderboardManager::GetCurrentPlayerName()</Name>
+              <FileRef uid="10" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="3047" ordinal="0" offset="0" sl="32" sc="5" el="32" ec="5" bec="0" bev="0" fileid="10" />
+                <SequencePoint vc="1" uspid="3048" ordinal="0" offset="1" sl="33" sc="9" el="33" ec="9" bec="0" bev="0" fileid="10" />
+                <SequencePoint vc="1" uspid="3049" ordinal="0" offset="17" sl="34" sc="9" el="34" ec="9" bec="0" bev="0" fileid="10" />
+                <SequencePoint vc="1" uspid="3050" ordinal="0" offset="36" sl="35" sc="5" el="35" ec="5" bec="0" bev="0" fileid="10" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="9" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0.0" branchCoverage="0.0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="3" />
+          <FullName>MonoSingleton[T]</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="0.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="true" isGetter="true" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663360</MetadataToken>
+              <Name>static T MonoSingleton[T]::get_Instance()</Name>
+              <FileRef uid="12" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="3154" ordinal="0" offset="0" sl="16" sc="0" el="16" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3155" ordinal="0" offset="1" sl="16" sc="0" el="16" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3156" ordinal="0" offset="9" sl="16" sc="0" el="16" ec="0" bec="0" bev="0" fileid="12" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="0.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="true" isGetter="false" isSetter="true">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663361</MetadataToken>
+              <Name>static System.Void MonoSingleton[T]::set_Instance(T)</Name>
+              <FileRef uid="12" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="3157" ordinal="0" offset="0" sl="17" sc="0" el="17" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3158" ordinal="0" offset="1" sl="17" sc="0" el="17" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3159" ordinal="0" offset="7" sl="17" sc="0" el="17" ec="0" bec="0" bev="0" fileid="12" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="0" nPathComplexity="0" sequenceCoverage="0.0" branchCoverage="0" crapScore="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0.0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663362</MetadataToken>
+              <Name>System.Void MonoSingleton[T]::Awake()</Name>
+              <FileRef uid="12" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="3160" ordinal="0" offset="0" sl="21" sc="0" el="21" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3161" ordinal="0" offset="1" sl="22" sc="0" el="22" ec="0" bec="0" bev="0" fileid="12" />
+                <SequencePoint vc="0" uspid="3162" ordinal="0" offset="17" sl="23" sc="0" el="23" ec="0" bec="0" bev="0" fileid="12" />
+              </SequencePoints>
+              <BranchPoints />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>
