@@ -18,9 +18,9 @@ public class GameplayTests
     {
         // Create test camera
         var cameraObj = new GameObject("TestCamera");
+        cameraObj.tag = "MainCamera";
         testCamera = cameraObj.AddComponent<Camera>();
         testCamera.orthographicSize = 5f;
-        Camera.main.tag = "MainCamera";
 
         // Create player
         playerObj = new GameObject("Player");
