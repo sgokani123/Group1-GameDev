@@ -59,12 +59,22 @@ public class MenuTests
         
         var playerObj = new GameObject("Player");
         gameManager.player = playerObj.AddComponent<Player>();
+        playerObj.AddComponent<Rigidbody2D>();
         gameManager.playerStartPosition = Vector3.zero;
+        
+        // Create a mock platform prefab for the spawner
+        var platformPrefab = new GameObject("PlatformPrefab");
+        platformPrefab.AddComponent<Tile>();
+        platformPrefab.AddComponent<BoxCollider2D>();
         
         var spawnerObj = new GameObject("PlatformSpawner");
         gameManager.platformSpawner = spawnerObj.AddComponent<PlatformSpawner>();
+        gameManager.platformSpawner.platformPrefab = platformPrefab;
+        gameManager.platformSpawner.prewarmPoolCount = 0; // Don't prewarm to avoid instantiation
         
         var cameraObj = new GameObject("Camera");
+        cameraObj.tag = "MainCamera";
+        var cam = cameraObj.AddComponent<Camera>();
         gameManager.cameraFollow = cameraObj.AddComponent<FollowTarget>();
 
         gameManager.ShowMenu();
@@ -78,6 +88,9 @@ public class MenuTests
         Assert.IsTrue(gameManager.hudPanel.activeSelf, "HUD panel should be visible");
         Assert.AreEqual(GameManager.GameState.Playing, gameManager.State, "Game state should be Playing");
         Assert.IsTrue(gameManager.player.enabled, "Player should be enabled");
+        
+        // Cleanup
+        Object.DestroyImmediate(platformPrefab);
     }
 
     [Test]
