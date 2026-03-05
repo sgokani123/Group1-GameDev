@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    // Min/max world-units per second for the speed slider (slider 0-100 maps across this range)
+    public const float SpeedMin = 2f;
+    public const float SpeedMax = 14f;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float jumpForce = 12f;
@@ -14,6 +18,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Camera mainCam;
     private bool isDead = false;
+
+    // Original sprite and scale — used to normalise skin swaps so size stays consistent
+    private Sprite _originalSprite;
+    private Vector3 _originalScale;
 
     // Added field to carry horizontal input from Update() to FixedUpdate()
     private float moveX;
@@ -27,11 +35,81 @@ public class Player : MonoBehaviour
 
     public void SetFloorY(float y) { floorY = y; }
 
+    /// <summary>Swaps the player sprite while keeping the same world size as the original.</summary>
+    public void ApplySkin(Sprite newSprite)
+    {
+        if (newSprite == null) return;
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null) return;
+
+        Sprite baseSprite = _originalSprite != null ? _originalSprite : sr.sprite;
+        if (baseSprite == null) { sr.sprite = newSprite; return; }
+
+        // World size of the baseline sprite at the recorded scale
+        float origW = (baseSprite.rect.width  / baseSprite.pixelsPerUnit) * Mathf.Abs(_originalScale.x);
+        float origH = (baseSprite.rect.height / baseSprite.pixelsPerUnit) * Mathf.Abs(_originalScale.y);
+
+        // Scale needed so the new sprite occupies the same world size
+        float newPPU = newSprite.pixelsPerUnit;
+        float scaleX = origW / (newSprite.rect.width  / newPPU);
+        float scaleY = origH / (newSprite.rect.height / newPPU);
+
+        // Save collider world-space offsets BEFORE scale changes so we can restore them
+        var circle = GetComponent<CircleCollider2D>();
+        var box    = GetComponent<BoxCollider2D>();
+        Vector2 circleWorldOffset = circle != null ? Vector2.Scale(circle.offset, transform.localScale) : Vector2.zero;
+        Vector2 boxWorldOffset    = box    != null ? Vector2.Scale(box.offset,    transform.localScale) : Vector2.zero;
+
+        sr.sprite = newSprite;
+        Vector3 newScale = new Vector3(
+            Mathf.Sign(_originalScale.x) * scaleX,
+            Mathf.Sign(_originalScale.y) * scaleY,
+            _originalScale.z);
+        transform.localScale = newScale;
+
+        // Restore collider offsets in new local space so world position is unchanged
+        if (circle != null)
+            circle.offset = new Vector2(circleWorldOffset.x / newScale.x, circleWorldOffset.y / newScale.y);
+        if (box != null)
+            box.offset = new Vector2(boxWorldOffset.x / newScale.x, boxWorldOffset.y / newScale.y);
+    }
+
+    /// <summary>Wraps the player across screen edges. Called by Rocket during flight
+    /// because player.enabled = false disables Update().</summary>
+    public void WrapPosition()
+    {
+        if (mainCam == null) mainCam = Camera.main;
+        if (mainCam == null) return;
+        Vector3 pos = transform.position;
+        if (pos.x < leftBorder - buffer)
+            pos.x = rightBorder + buffer;
+        else if (pos.x > rightBorder + buffer)
+            pos.x = leftBorder - buffer;
+        transform.position = pos;
+    }
+
+    /// <summary>Called by OptionsMenuController slider. sliderValue 0-100.</summary>
+    public void SetSpeedFromSlider(float sliderValue)
+    {
+        moveSpeed = Mathf.Lerp(SpeedMin, SpeedMax, sliderValue / 100f);
+        PlayerPrefs.SetFloat("PlayerSpeed", sliderValue);
+        PlayerPrefs.Save();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         mainCam = Camera.main;
         RefreshBorders();
+
+        // Record the baseline sprite and scale so skin swaps stay the same world size
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr != null) _originalSprite = sr.sprite;
+        _originalScale = transform.localScale;
+
+        // Restore saved speed
+        float saved = PlayerPrefs.GetFloat("PlayerSpeed", 38f);
+        SetSpeedFromSlider(saved);
     }
 
     // Ensure references are valid when the component is enabled (prevents NRE when toggled)
@@ -63,15 +141,15 @@ public class Player : MonoBehaviour
 
         Vector3 acc = Vector3.zero;
 
-        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
+        if (KeyBindings.IsLeftPressed())
         {
             acc.x = -1f;
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
-        else if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
+        else if (KeyBindings.IsRightPressed())
         {
             acc.x = 1f;
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
         // Store horizontal input for FixedUpdate physics write
