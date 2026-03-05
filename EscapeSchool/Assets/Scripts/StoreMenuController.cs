@@ -9,7 +9,13 @@ using UnityEngine.UI;
 public class StoreMenuController : MonoBehaviour
 {
     [Header("Rocket options (fly1 ... fly7)")]
-    public Sprite[] rocketSprites;
+    public Sprite[]  rocketSprites;
+    /// <summary>
+    /// Attachment offset for each rocket when parented to the player.
+    /// X/Y in local player space. Z should stay small (e.g. 0.1).
+    /// Examples: balloon = (0, 1.5, 0.1)  hat = (0, 0.6, 0.1)  shoe = (0, -0.5, 0.1)
+    /// </summary>
+    public Vector3[] rocketOffsets;  // same length as rocketSprites
 
     [Header("Character options (Student1, 2, 3)")]
     public Sprite[] characterSprites;
@@ -93,6 +99,13 @@ public class StoreMenuController : MonoBehaviour
         int i = StoreManager.GetRocketIndex();
         if (rocketSprites == null || i >= rocketSprites.Length) return null;
         return rocketSprites[i];
+    }
+
+    public Vector3 GetSelectedRocketOffset(Vector3 fallback)
+    {
+        int i = StoreManager.GetRocketIndex();
+        if (rocketOffsets == null || i >= rocketOffsets.Length) return fallback;
+        return rocketOffsets[i];
     }
 
     public Sprite GetSelectedCharacterSprite()
