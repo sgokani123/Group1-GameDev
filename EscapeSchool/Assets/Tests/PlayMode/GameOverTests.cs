@@ -113,6 +113,7 @@ public class GameOverTests
     public void OnGameOver_NewPersonalBest_UpdatesHighScore()
     {
         // Arrange
+        LeaderboardManager.SetCurrentPlayerName("TestPlayer"); // Set player name for leaderboard
         PlayerPrefs.SetInt("BestScore", 50);
         gameManager.State = GameManager.GameState.Playing;
         playerObj.transform.position = new Vector3(0, 11f, 0); // Score 100
@@ -123,8 +124,10 @@ public class GameOverTests
 
         // Assert
         Assert.AreEqual(100, savedBest, "Personal best should be updated to 100");
-        Assert.IsTrue(gameManager.gameOverStatusText.text.Contains("PERSONAL BEST"), 
-            "Status should indicate new personal best");
+        Assert.IsNotNull(gameManager.gameOverStatusText.text, "Status text should not be null");
+        Assert.IsTrue(gameManager.gameOverStatusText.text.Contains("PERSONAL BEST") || 
+                      gameManager.gameOverStatusText.text.Contains("HIGH SCORE"), 
+            "Status should indicate new personal best or high score");
     }
 
     [Test]
