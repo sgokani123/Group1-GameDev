@@ -11,6 +11,50 @@ public class Rocket : MonoBehaviour
 
     private bool isUsed = false;
     private float originalGravity = 1f;
+    private Vector3 _attachOffset;  // set in Awake from StoreManager, falls back to offset
+
+    void Awake()
+    {
+        // Default attach offset is the Inspector value
+        _attachOffset = offset;
+
+        if (GameManager.Instance?.storeMenuController == null) return;
+        var store  = GameManager.Instance.storeMenuController;
+        var sprite = store.GetSelectedRocketSprite();
+        if (sprite == null) return;
+        var sr = GetComponent<SpriteRenderer>();
+        if (sr == null || sr.sprite == null) return;
+
+        // Normalise scale so the rocket stays the same world size as the default
+        Sprite orig = sr.sprite;
+        float origW = orig.rect.width  / orig.pixelsPerUnit;
+        float origH = orig.rect.height / orig.pixelsPerUnit;
+        float scaleX = origW / (sprite.rect.width  / sprite.pixelsPerUnit);
+        float scaleY = origH / (sprite.rect.height / sprite.pixelsPerUnit);
+        sr.sprite = sprite;
+        Vector3 s = transform.localScale;
+        transform.localScale = new Vector3(s.x * scaleX, s.y * scaleY, s.z);
+
+        // Fit pickup collider to the new sprite's actual pixel bounds
+        float worldW = (sprite.rect.width  / sprite.pixelsPerUnit) * Mathf.Abs(transform.localScale.x);
+        float worldH = (sprite.rect.height / sprite.pixelsPerUnit) * Mathf.Abs(transform.localScale.y);
+        var box = GetComponent<BoxCollider2D>();
+        if (box != null)
+        {
+            box.size   = new Vector2(worldW / Mathf.Abs(transform.localScale.x),
+                                     worldH / Mathf.Abs(transform.localScale.y));
+            box.offset = Vector2.zero;
+        }
+        var circle = GetComponent<CircleCollider2D>();
+        if (circle != null)
+        {
+            circle.radius = Mathf.Min(worldW, worldH) * 0.5f / Mathf.Abs(transform.localScale.x);
+            circle.offset = Vector2.zero;
+        }
+
+        // Per-skin attachment offset
+        _attachOffset = store.GetSelectedRocketOffset(offset);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,7 +74,7 @@ public class Rocket : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         transform.SetParent(player.transform);
-        transform.localPosition = offset;
+        transform.localPosition = _attachOffset;
 
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         if (rb == null) yield break;
@@ -58,6 +102,7 @@ public class Rocket : MonoBehaviour
                 else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveX = 1f;
             }
             rb.linearVelocity = new Vector2(moveX * player.moveSpeed, flySpeed);
+            player.WrapPosition();
             yield return null;
         }
 
@@ -79,6 +124,7 @@ public class Rocket : MonoBehaviour
                     else if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) moveX = 1f;
                 }
                 rb.linearVelocity = new Vector2(moveX * player.moveSpeed, rb.linearVelocity.y);
+                player.WrapPosition();
                 yield return null;
             }
         }

@@ -11,8 +11,6 @@ public class PlatformSpawner : MonoBehaviour
     public GameObject enemyPrefab;      // Inspector enemy
 
     [Header("Gap Enemies (floating in mid-air)")]
-    [Tooltip("Scale applied to every enemy instance (0.5 = half size).")]
-    public float enemyScale = 0.5f;
     [Tooltip("Gap enemies start appearing at this Y height.")]
     public float gapEnemyMinHeight = 8f;
     [Tooltip("Maximum spawn chance for a gap enemy per platform gap (scaled by difficulty).")]
@@ -28,6 +26,11 @@ public class PlatformSpawner : MonoBehaviour
     public float gapEnemyMinGapSize = 1.3f;
     [Tooltip("Half-width of the 'jump path' dead zone around the arc midpoint X. Enemy won't spawn here.")]
     public float gapEnemyJumpExclusion = 0.9f;
+    [Tooltip("Multiplier applied on top of the prefab's own scale. 1 = unchanged, 1.5 = 50% bigger.")]
+    public float enemyScaleMultiplier = 1.1f;
+    [Tooltip("0 = dead centre of gap, lower values sit closer to the bottom platform (0.25 = slight overlap).")]
+    [Range(0f, 0.49f)]
+    public float gapEnemyPlatformBias = 0.05f;
 
     [Header("Rocket Spawn Settings")]
     public GameObject rocketPrefab;      // �� Inspector rocket
@@ -311,7 +314,8 @@ public class PlatformSpawner : MonoBehaviour
         if (enemyPrefab == null) return;
 
         float gapSize = topY - bottomY;
-        float midY = (bottomY + topY) * 0.5f;
+        // Bias Y toward the bottom platform for a slight overlap; 0.5 = centre, 0.28 = lower third.
+        float midY = Mathf.Lerp(bottomY, topY, 0.5f - gapEnemyPlatformBias);
 
         // Only spawn in gaps large enough to give the enemy room without blocking the path.
         if (gapSize < gapEnemyMinGapSize) return;
@@ -351,10 +355,8 @@ public class PlatformSpawner : MonoBehaviour
         if (!placed) return;
 
         GameObject enemy = Instantiate(enemyPrefab, new Vector3(ex, midY, 0f), Quaternion.identity);
-
-        // Same visual scale as platform enemies.
-        float s = Mathf.Clamp(enemyScale, 0.1f, 2f);
-        enemy.transform.localScale = new Vector3(s, s, 1f);
+        // Scale relative to the prefab's own scale so the Inspector value stays as the baseline.
+        enemy.transform.localScale *= enemyScaleMultiplier;
 
         // Patrol distance: use inspector value, also slightly wider at higher difficulty.
         float patrol = Mathf.Lerp(gapEnemyPatrol, gapEnemyPatrol * 1.5f, d);
