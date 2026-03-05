@@ -45,7 +45,6 @@ public class GameplayTests
     {
         // Arrange
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         var platformCollider = platformObj.AddComponent<BoxCollider2D>();
         platformObj.AddComponent<Tile>();
         
@@ -67,7 +66,6 @@ public class GameplayTests
     {
         // Arrange
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 0; // Normal platform
@@ -117,7 +115,6 @@ public class GameplayTests
     {
         // Arrange
         var platformObj = new GameObject("Platform");
-        platformObj.tag = "Tile";
         platformObj.AddComponent<BoxCollider2D>();
         var tile = platformObj.AddComponent<Tile>();
         tile.tileType = 0; // Normal platform
@@ -189,7 +186,6 @@ public class GameplayTests
     {
         // Arrange
         var lowerPlatformObj = new GameObject("LowerPlatform");
-        lowerPlatformObj.tag = "Tile";
         lowerPlatformObj.AddComponent<BoxCollider2D>();
         lowerPlatformObj.AddComponent<Tile>();
         
