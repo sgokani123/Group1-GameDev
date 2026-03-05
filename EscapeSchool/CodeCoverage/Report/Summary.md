@@ -1,21 +1,21 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 12:12:30 |
+| Generated on: | 05/03/2026 - 12:19:51 |
 | Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 1456 |
-| Uncovered lines: | 740 |
-| Coverable lines: | 2196 |
-| Total lines: | 4185 |
-| Line coverage: | 66.3% (1456 of 2196) |
+| Covered lines: | 1434 |
+| Uncovered lines: | 803 |
+| Coverable lines: | 2237 |
+| Total lines: | 4181 |
+| Line coverage: | 64.1% (1434 of 2237) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
-| Covered methods: | 212 |
-| Total methods: | 275 |
-| Method coverage: | 77% (212 of 275) |
+| Covered methods: | 219 |
+| Total methods: | 282 |
+| Method coverage: | 77.6% (219 of 282) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -24,7 +24,7 @@
 |LeaderboardManagerTests|99|0|99|204|100%|0|0||17|17|100%|
 |LeaderboardTests|33|0|33|75|100%|0|0||5|5|100%|
 |ObjectPoolTests|35|0|35|85|100%|0|0||6|6|100%|
-|**GameAssembly**|**681**|**619**|**1300**|**2465**|**52.3%**|**0**|**0**|****|**101**|**157**|**64.3%**|
+|**GameAssembly**|**659**|**641**|**1300**|**2465**|**50.6%**|**0**|**0**|****|**101**|**157**|**64.3%**|
 |Ajust|0|35|35|71|0%|0|0||0|6|0%|
 |Enemy|17|33|50|93|34%|0|0||4|8|50%|
 |FollowTarget|22|5|27|52|81.4%|0|0||6|6|100%|
@@ -36,7 +36,7 @@
 |MusicManager|7|11|18|39|38.8%|0|0||3|4|75%|
 |ObjectPool|29|0|29|50|100%|0|0||5|5|100%|
 |OptionsMenuController|35|98|133|285|26.3%|0|0||8|17|47%|
-|PlatformSpawner|169|66|235|416|71.9%|0|0||12|14|85.7%|
+|PlatformSpawner|160|75|235|416|68%|0|0||12|14|85.7%|
 |PlatformWeights|17|0|17|62|100%|0|0||3|3|100%|
 |Player|76|59|135|235|56.2%|0|0||10|13|76.9%|
 |Rocket|10|96|106|156|9.4%|0|0||2|5|40%|
@@ -44,11 +44,11 @@
 |SoundManager|5|9|14|33|35.7%|0|0||1|5|20%|
 |StoreManager|0|10|10|20|0%|0|0||0|4|0%|
 |StoreMenuController|0|59|59|117|0%|0|0||0|10|0%|
-|Tile|46|46|92|150|50%|0|0||6|8|75%|
-|**PlayModeTests**|**492**|**121**|**613**|**1122**|**80.2%**|**0**|**0**|****|**63**|**70**|**90%**|
+|Tile|33|59|92|150|35.8%|0|0||6|8|75%|
+|**PlayModeTests**|**492**|**162**|**654**|**1118**|**75.2%**|**0**|**0**|****|**70**|**77**|**90.9%**|
 |GameManagerTests|63|3|66|133|95.4%|0|0||9|9|100%|
 |GameOverTests|75|9|84|163|89.2%|0|0||10|10|100%|
-|GameplayTests|102|4|106|207|96.2%|0|0||10|10|100%|
+|GameplayTests|102|45|147|203|69.3%|0|0||17|17|100%|
 |MenuTests|86|17|103|153|83.4%|0|0||8|8|100%|
 |PlatformInteractionTests|47|21|68|99|69.1%|0|0||9|9|100%|
 |PlayerTests|39|0|39|89|100%|0|0||6|6|100%|
