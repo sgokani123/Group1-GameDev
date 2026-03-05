@@ -1,18 +1,22 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class LeaderboardManager
 {
     private const string CurrentNameKey = "current_player_name";
-    private const string LeaderboardKey = "leaderboard_v1"; // stored as JSON
+    private const string LeaderboardKey = "leaderboard_v2"; // top-10 individual runs
+    public  const string DefaultName    = "Anonymous";
+    public  const int    MaxNameLength  = 15;
+    private const int    MaxEntries     = 10;
 
     [Serializable]
     private class Entry
     {
         public string name;
-        public int bestScore;
+        public int score; // this run's score; same player can appear multiple times
     }
 
     [Serializable]
@@ -22,76 +26,108 @@ public static class LeaderboardManager
     }
 
     // ---------- Name ----------
+
+    /// <summary>Returns the saved name, or "Anonymous" if none is set.</summary>
     public static string GetCurrentPlayerName()
     {
-        return PlayerPrefs.GetString(CurrentNameKey, "");
+        string n = PlayerPrefs.GetString(CurrentNameKey, "");
+        return string.IsNullOrEmpty(n) ? DefaultName : n;
     }
 
-    public static void SetCurrentPlayerName(string name)
+    /// <summary>
+    /// Validates then saves the name. Returns null on success, or an error string to show the user.
+    /// Passing empty/null resets back to Anonymous.
+    /// </summary>
+    public static string TrySetCurrentPlayerName(string name)
     {
-        name = SanitizeName(name);
-        PlayerPrefs.SetString(CurrentNameKey, name);
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            PlayerPrefs.SetString(CurrentNameKey, "");
+            PlayerPrefs.Save();
+            return null;
+        }
+        string error = ValidateName(name);
+        if (error != null) return error;
+        PlayerPrefs.SetString(CurrentNameKey, name.Trim());
         PlayerPrefs.Save();
+        return null;
+    }
+
+    /// <summary>Legacy setter used internally. Silently ignores invalid names.</summary>
+    public static void SetCurrentPlayerName(string name) => TrySetCurrentPlayerName(name);
+
+    /// <summary>
+    /// Returns null if valid, or a short error message.
+    /// Rules: letters + digits only, no spaces, 1-15 chars.
+    /// </summary>
+    public static string ValidateName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return null; // empty = reset
+        name = name.Trim();
+        if (name.Length > MaxNameLength) return $"Max {MaxNameLength} characters";
+        if (name.Contains(" "))          return "No spaces allowed";
+        if (!Regex.IsMatch(name, @"^[A-Za-z0-9]+$")) return "Letters and numbers only";
+        return null;
     }
 
     // ---------- Scores ----------
+
+    /// <summary>Adds this run to the global top-10. Same player can appear multiple times.</summary>
     public static void SubmitScore(int score)
     {
         string current = GetCurrentPlayerName();
-        if (string.IsNullOrWhiteSpace(current)) return; // no name set => don't save
-
         var list = Load();
-
-        // Case-sensitive match (caps allowed; not treated as “sensitive”)
-        var entry = list.entries.FirstOrDefault(e => e.name == current);
-        if (entry == null)
-        {
-            entry = new Entry { name = current, bestScore = score };
-            list.entries.Add(entry);
-        }
-        else
-        {
-            if (score > entry.bestScore)
-                entry.bestScore = score;
-        }
-
+        list.entries.Add(new Entry { name = current, score = score });
+        list.entries = list.entries
+            .OrderByDescending(e => e.score)
+            .Take(MaxEntries)
+            .ToList();
         Save(list);
     }
 
+    /// <summary>Best score this player has in the top-10 list, or 0 if not present.</summary>
     public static int GetBestForCurrentPlayer()
     {
         string current = GetCurrentPlayerName();
-        if (string.IsNullOrWhiteSpace(current)) return 0;
-
         var list = Load();
-        var entry = list.entries.FirstOrDefault(e => e.name == current);
-        return entry != null ? entry.bestScore : 0;
+        var entries = list.entries.Where(e => e.name == current).ToList();
+        return entries.Count > 0 ? entries.Max(e => e.score) : 0;
+    }
+
+    /// <summary>Returns the 1-based rank of the current player's best entry, or 0 if not on the board.</summary>
+    public static int GetRankForCurrentPlayer()
+    {
+        string current = GetCurrentPlayerName();
+        var sorted = GetLeaderboardSorted();
+        for (int i = 0; i < sorted.Count; i++)
+            if (sorted[i].name == current) return i + 1;
+        return 0;
     }
 
     public static int GetGlobalBest()
     {
         var list = Load();
         if (list.entries == null || list.entries.Count == 0) return 0;
-        return list.entries.Max(e => e.bestScore);
+        return list.entries.Max(e => e.score);
     }
 
-    public static List<(string name, int bestScore)> GetLeaderboardSorted()
+    /// <summary>Returns up to 10 entries sorted by score descending.</summary>
+    public static List<(string name, int score)> GetLeaderboardSorted()
     {
         var list = Load();
         return list.entries
-            .OrderByDescending(e => e.bestScore)
-            .ThenBy(e => e.name)
-            .Select(e => (e.name, e.bestScore))
+            .OrderByDescending(e => e.score)
+            .Select(e => (e.name, e.score))
             .ToList();
     }
 
     // ---------- Storage ----------
+
     private static EntryList Load()
     {
         string json = PlayerPrefs.GetString(LeaderboardKey, "");
         if (string.IsNullOrEmpty(json))
             return new EntryList();
-
         try
         {
             var data = JsonUtility.FromJson<EntryList>(json);
@@ -109,19 +145,5 @@ public static class LeaderboardManager
         string json = JsonUtility.ToJson(list);
         PlayerPrefs.SetString(LeaderboardKey, json);
         PlayerPrefs.Save();
-    }
-
-    private static string SanitizeName(string name)
-    {
-        if (name == null) return "";
-        name = name.Trim();
-
-        // prevent newlines / weird whitespace
-        name = name.Replace("\n", " ").Replace("\r", " ").Replace("\t", " ");
-
-        // optional: limit length so UI doesn’t explode
-        if (name.Length > 16) name = name.Substring(0, 16);
-
-        return name;
     }
 }
