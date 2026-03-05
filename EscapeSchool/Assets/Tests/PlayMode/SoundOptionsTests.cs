@@ -12,12 +12,17 @@ public class SoundOptionsTests
     private SoundManager soundManager;
     private GameObject musicManagerObj;
     private MusicManager musicManager;
+    private GameObject audioListenerObj;
 
     [SetUp]
     public void Setup()
     {
         // Clear PlayerPrefs for consistent testing
         PlayerPrefs.DeleteAll();
+
+        // Create AudioListener - required for audio to play in the scene
+        audioListenerObj = new GameObject("AudioListener");
+        audioListenerObj.AddComponent<AudioListener>();
 
         // Create SoundManager - add AudioSource BEFORE SoundManager
         soundManagerObj = new GameObject("SoundManager");
@@ -36,6 +41,8 @@ public class SoundOptionsTests
     [TearDown]
     public void Teardown()
     {
+        if (audioListenerObj != null)
+            Object.DestroyImmediate(audioListenerObj);
         if (soundManagerObj != null)
             Object.DestroyImmediate(soundManagerObj);
         if (musicManagerObj != null)
@@ -102,7 +109,7 @@ public class SoundOptionsTests
         soundManager.SetMuted(false); // Click On again
 
         // Assert
-        Assert.AreEqual(initialVolume, AudioListener.volume, 
+        Assert.AreEqual(initialVolume, AudioListener.volume,
             "Volume should remain unchanged when clicking On while already enabled");
         Assert.IsFalse(soundManager.IsMuted, "Sound should remain unmuted");
     }
@@ -118,7 +125,7 @@ public class SoundOptionsTests
         soundManager.SetMuted(true); // Click Off again
 
         // Assert
-        Assert.AreEqual(initialVolume, AudioListener.volume, 
+        Assert.AreEqual(initialVolume, AudioListener.volume,
             "Volume should remain unchanged when clicking Off while already disabled");
         Assert.IsTrue(soundManager.IsMuted, "Sound should remain muted");
     }
@@ -154,7 +161,7 @@ public class SoundOptionsTests
         newSoundManagerObj.AddComponent<AudioSource>();
 
         // Assert
-        Assert.AreEqual(0f, AudioListener.volume, 
+        Assert.AreEqual(0f, AudioListener.volume,
             "AudioListener should be muted on startup when PlayerPrefs indicates muted");
 
         // Cleanup

@@ -1,21 +1,21 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 12:56:28 |
+| Generated on: | 05/03/2026 - 13:14:53 |
 | Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 439 |
-| Uncovered lines: | 1805 |
-| Coverable lines: | 2244 |
-| Total lines: | 4184 |
-| Line coverage: | 19.5% (439 of 2244) |
+| Covered lines: | 1523 |
+| Uncovered lines: | 615 |
+| Coverable lines: | 2138 |
+| Total lines: | 4191 |
+| Line coverage: | 71.2% (1523 of 2138) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
-| Covered methods: | 77 |
-| Total methods: | 284 |
-| Method coverage: | 27.1% (77 of 284) |
+| Covered methods: | 212 |
+| Total methods: | 265 |
+| Method coverage: | 80% (212 of 265) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -24,33 +24,33 @@
 |LeaderboardManagerTests|99|0|99|204|100%|0|0||17|17|100%|
 |LeaderboardTests|33|0|33|75|100%|0|0||5|5|100%|
 |ObjectPoolTests|35|0|35|85|100%|0|0||6|6|100%|
-|**GameAssembly**|**121**|**1186**|**1307**|**2468**|**9.2%**|**0**|**0**|****|**25**|**159**|**15.7%**|
+|**GameAssembly**|**693**|**610**|**1303**|**2468**|**53.1%**|**0**|**0**|****|**104**|**157**|**66.2%**|
 |Ajust|0|35|35|71|0%|0|0||0|6|0%|
-|Enemy|0|50|50|93|0%|0|0||0|8|0%|
-|FollowTarget|0|27|27|52|0%|0|0||0|6|0%|
-|GameManager|0|202|202|393|0%|0|0||0|21|0%|
-|KeyBindings|0|20|20|47|0%|0|0||0|7|0%|
-|LeaderboardManager|65|10|75|149|86.6%|0|0||11|12|91.6%|
+|Enemy|17|33|50|93|34%|0|0||4|8|50%|
+|FollowTarget|22|5|27|52|81.4%|0|0||6|6|100%|
+|GameManager|149|53|202|393|73.7%|0|0||18|21|85.7%|
+|KeyBindings|18|2|20|47|90%|0|0||5|7|71.4%|
+|LeaderboardManager|71|4|75|149|94.6%|0|0||12|12|100%|
 |LeaderboardRow|0|17|17|33|0%|0|0||0|3|0%|
-|MonoSingleton[T]|4|1|5|24|80%|0|0||2|3|66.6%|
+|MonoSingleton[T]|5|0|5|24|100%|0|0||3|3|100%|
 |MusicManager|13|5|18|39|72.2%|0|0||4|4|100%|
 |ObjectPool|29|0|29|50|100%|0|0||5|5|100%|
-|OptionsMenuController|0|133|133|285|0%|0|0||0|17|0%|
-|PlatformSpawner|0|235|235|416|0%|0|0||0|14|0%|
-|PlatformWeights|0|17|17|62|0%|0|0||0|3|0%|
-|Player|0|135|135|235|0%|0|0||0|13|0%|
-|Rocket|0|106|106|156|0%|0|0||0|5|0%|
-|ScoresMenuController|0|21|21|40|0%|0|0||0|3|0%|
-|SoundManager|10|11|21|36|47.6%|0|0||3|7|42.8%|
+|OptionsMenuController|35|98|133|285|26.3%|0|0||8|17|47%|
+|PlatformSpawner|169|66|235|416|71.9%|0|0||12|14|85.7%|
+|PlatformWeights|17|0|17|62|100%|0|0||3|3|100%|
+|Player|76|59|135|235|56.2%|0|0||10|13|76.9%|
+|Rocket|10|96|106|156|9.4%|0|0||2|5|40%|
+|ScoresMenuController|5|16|21|40|23.8%|0|0||3|3|100%|
+|SoundManager|11|6|17|36|64.7%|0|0||3|5|60%|
 |StoreManager|0|10|10|20|0%|0|0||0|4|0%|
 |StoreMenuController|0|59|59|117|0%|0|0||0|10|0%|
-|Tile|0|92|92|150|0%|0|0||0|8|0%|
-|**PlayModeTests**|**35**|**619**|**654**|**1118**|**5.3%**|**0**|**0**|****|**4**|**77**|**5.1%**|
-|GameManagerTests|0|66|66|133|0%|0|0||0|9|0%|
-|GameOverTests|0|84|84|163|0%|0|0||0|10|0%|
-|GameplayTests|0|147|147|203|0%|0|0||0|17|0%|
-|MenuTests|0|103|103|153|0%|0|0||0|8|0%|
-|PlatformInteractionTests|0|68|68|99|0%|0|0||0|9|0%|
-|PlayerTests|0|39|39|89|0%|0|0||0|6|0%|
-|ScoreAndTimerTests|0|73|73|115|0%|0|0||0|9|0%|
-|SoundOptionsTests|35|39|74|163|47.2%|0|0||4|9|44.4%|
+|Tile|46|46|92|150|50%|0|0||6|8|75%|
+|**PlayModeTests**|**547**|**5**|**552**|**1125**|**99%**|**0**|**0**|****|**60**|**60**|**100%**|
+|GameManagerTests|63|3|66|133|95.4%|0|0||9|9|100%|
+|GameOverTests|75|0|75|163|100%|0|0||8|8|100%|
+|GameplayTests|102|0|102|203|100%|0|0||10|10|100%|
+|MenuTests|86|0|86|153|100%|0|0||6|6|100%|
+|PlatformInteractionTests|47|0|47|99|100%|0|0||6|6|100%|
+|PlayerTests|39|0|39|89|100%|0|0||6|6|100%|
+|ScoreAndTimerTests|59|0|59|115|100%|0|0||6|6|100%|
+|SoundOptionsTests|76|2|78|170|97.4%|0|0||9|9|100%|
