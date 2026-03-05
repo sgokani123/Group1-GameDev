@@ -1,16 +1,16 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 05/03/2026 - 10:51:17 |
+| Generated on: | 05/03/2026 - 10:55:42 |
 | Parser: | MultiReportParser (4x OpenCoverParser) |
 | Assemblies: | 3 |
 | Classes: | 32 |
 | Files: | 32 |
-| Covered lines: | 1322 |
-| Uncovered lines: | 824 |
-| Coverable lines: | 2146 |
-| Total lines: | 4172 |
-| Line coverage: | 61.6% (1322 of 2146) |
+| Covered lines: | 1325 |
+| Uncovered lines: | 823 |
+| Coverable lines: | 2148 |
+| Total lines: | 4174 |
+| Line coverage: | 61.6% (1325 of 2148) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
 | Covered methods: | 192 |
@@ -45,12 +45,12 @@
 |StoreManager|0|10|10|20|0%|0|0||0|4|0%|
 |StoreMenuController|0|59|59|117|0%|0|0||0|10|0%|
 |Tile|58|34|92|150|63%|0|0||6|8|75%|
-|**PlayModeTests**|**386**|**177**|**563**|**1109**|**68.5%**|**0**|**0**|****|**49**|**64**|**76.5%**|
+|**PlayModeTests**|**389**|**176**|**565**|**1111**|**68.8%**|**0**|**0**|****|**49**|**64**|**76.5%**|
 |GameManagerTests|63|3|66|133|95.4%|0|0||9|9|100%|
 |GameOverTests|75|9|84|163|89.2%|0|0||10|10|100%|
 |GameplayTests|10|96|106|207|9.4%|0|0||2|10|20%|
 |MenuTests|76|14|90|139|84.4%|0|0||8|8|100%|
 |PlatformInteractionTests|51|0|51|103|100%|0|0||6|6|100%|
-|PlayerTests|36|1|37|87|97.2%|0|0||6|6|100%|
+|PlayerTests|39|0|39|89|100%|0|0||6|6|100%|
 |ScoreAndTimerTests|54|1|55|114|98.1%|0|0||6|6|100%|
 |SoundOptionsTests|21|53|74|163|28.3%|0|0||2|9|22.2%|

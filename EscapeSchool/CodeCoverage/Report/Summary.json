@@ -1,14 +1,14 @@
 {
   "summary": {
-    "generatedon": "2026-03-05T10:51:17Z",
+    "generatedon": "2026-03-05T10:55:42Z",
     "parser": "MultiReportParser (4x OpenCoverParser)",
     "assemblies": 3,
     "classes": 32,
     "files": 32,
-    "coveredlines": 1322,
-    "uncoveredlines": 824,
-    "coverablelines": 2146,
-    "totallines": 4172,
+    "coveredlines": 1325,
+    "uncoveredlines": 823,
+    "coverablelines": 2148,
+    "totallines": 4174,
     "linecoverage": 61.6,
     "coveredbranches": 0,
     "totalbranches": 0,
@@ -44,13 +44,13 @@
         { "name": "StoreManager", "coverage": 0, "coveredlines": 0, "coverablelines": 10, "totallines": 20, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
         { "name": "StoreMenuController", "coverage": 0, "coveredlines": 0, "coverablelines": 59, "totallines": 117, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 10 },
         { "name": "Tile", "coverage": 63, "coveredlines": 58, "coverablelines": 92, "totallines": 150, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 75, "coveredmethods": 6, "totalmethods": 8 } ] },
-      { "name": "PlayModeTests", "classes": 8, "coverage": 68.5, "coveredlines": 386, "coverablelines": 563, "totallines": 1109, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 76.5, "coveredmethods": 49, "totalmethods": 64, "classesinassembly": [
+      { "name": "PlayModeTests", "classes": 8, "coverage": 68.8, "coveredlines": 389, "coverablelines": 565, "totallines": 1111, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 76.5, "coveredmethods": 49, "totalmethods": 64, "classesinassembly": [
         { "name": "GameManagerTests", "coverage": 95.4, "coveredlines": 63, "coverablelines": 66, "totallines": 133, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 9, "totalmethods": 9 },
         { "name": "GameOverTests", "coverage": 89.2, "coveredlines": 75, "coverablelines": 84, "totallines": 163, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 10, "totalmethods": 10 },
         { "name": "GameplayTests", "coverage": 9.4, "coveredlines": 10, "coverablelines": 106, "totallines": 207, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 20, "coveredmethods": 2, "totalmethods": 10 },
         { "name": "MenuTests", "coverage": 84.4, "coveredlines": 76, "coverablelines": 90, "totallines": 139, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 8, "totalmethods": 8 },
         { "name": "PlatformInteractionTests", "coverage": 100, "coveredlines": 51, "coverablelines": 51, "totallines": 103, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
-        { "name": "PlayerTests", "coverage": 97.2, "coveredlines": 36, "coverablelines": 37, "totallines": 87, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
+        { "name": "PlayerTests", "coverage": 100, "coveredlines": 39, "coverablelines": 39, "totallines": 89, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
         { "name": "ScoreAndTimerTests", "coverage": 98.1, "coveredlines": 54, "coverablelines": 55, "totallines": 114, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 6, "totalmethods": 6 },
         { "name": "SoundOptionsTests", "coverage": 28.3, "coveredlines": 21, "coverablelines": 74, "totallines": 163, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 22.2, "coveredmethods": 2, "totalmethods": 9 } ] } ]
   }
