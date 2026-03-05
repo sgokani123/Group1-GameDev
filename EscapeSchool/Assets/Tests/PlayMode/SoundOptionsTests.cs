@@ -19,17 +19,17 @@ public class SoundOptionsTests
         // Clear PlayerPrefs for consistent testing
         PlayerPrefs.DeleteAll();
 
-        // Create SoundManager
+        // Create SoundManager - add AudioSource BEFORE SoundManager
         soundManagerObj = new GameObject("SoundManager");
-        soundManager = soundManagerObj.AddComponent<SoundManager>();
         soundManagerObj.AddComponent<AudioSource>();
+        soundManager = soundManagerObj.AddComponent<SoundManager>();
         SoundManager.Instance = soundManager;
 
-        // Create MusicManager
+        // Create MusicManager - add AudioSource and clip BEFORE MusicManager
         musicManagerObj = new GameObject("MusicManager");
-        musicManager = musicManagerObj.AddComponent<MusicManager>();
         var audioSource = musicManagerObj.AddComponent<AudioSource>();
         audioSource.clip = AudioClip.Create("TestClip", 44100, 1, 44100, false);
+        musicManager = musicManagerObj.AddComponent<MusicManager>();
         MusicManager.Instance = musicManager;
     }
 
