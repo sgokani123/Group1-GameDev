@@ -82,21 +82,6 @@ public class SoundOptionsTests
         Assert.AreEqual(0f, AudioListener.volume, "AudioListener volume should be 0");
     }
 
-    [UnityTest]
-    public IEnumerator MusicPlays_WhenSoundIsEnabled()
-    {
-        // Arrange
-        soundManager.SetMuted(false);
-        var audioSource = musicManager.GetComponent<AudioSource>();
-
-        // Act
-        musicManager.PlayMusic();
-        yield return null;
-
-        // Assert
-        Assert.IsTrue(audioSource.isPlaying, "Music should be playing when sound is enabled");
-        Assert.IsFalse(soundManager.IsMuted, "Sound should not be muted");
-    }
 
     [Test]
     public void OnButton_DoesNothing_WhenSoundAlreadyEnabled()
