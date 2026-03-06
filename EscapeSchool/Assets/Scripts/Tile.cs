@@ -128,6 +128,7 @@ public class Tile : MonoBehaviour
                 break;
 
             case 3: // spring
+                if (SoundManager.Instance != null) SoundManager.Instance.PlaySFX(3);
                 player.Jump(1.5f);
                 break;
 
@@ -145,6 +146,11 @@ public class Tile : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.gravityScale = 1f;
+        }
+
+        if (tileType == 1 && SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySFX(4);
         }
     }
 }
