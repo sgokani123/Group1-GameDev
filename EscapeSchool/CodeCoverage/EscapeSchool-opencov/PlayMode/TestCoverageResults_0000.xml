@@ -7,10 +7,10 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>EditModeTests</ModuleName>
       <Files>
-        <File uid="1" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/GameLogicTests.cs" />
-        <File uid="2" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardManagerTests.cs" />
-        <File uid="3" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardTests.cs" />
-        <File uid="4" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/ObjectPoolTests.cs" />
+        <File uid="1" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/GameLogicTests.cs" />
+        <File uid="2" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardManagerTests.cs" />
+        <File uid="3" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/LeaderboardTests.cs" />
+        <File uid="4" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/EditMode/ObjectPoolTests.cs" />
       </Files>
       <Classes>
         <Class>
@@ -801,26 +801,26 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>GameAssembly</ModuleName>
       <Files>
-        <File uid="5" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Ajust.cs" />
-        <File uid="6" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Enemy.cs" />
-        <File uid="7" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/FollowTarget.cs" />
-        <File uid="8" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/GameManager.cs" />
-        <File uid="9" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/KeyBindings.cs" />
-        <File uid="10" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardManager.cs" />
-        <File uid="11" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardRow.cs" />
-        <File uid="12" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/MonoSingleton.cs" />
-        <File uid="13" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Music manager.cs" />
-        <File uid="14" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ObjectPool.cs" />
-        <File uid="15" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/OptionsMenuController.cs" />
-        <File uid="16" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformSpawner.cs" />
-        <File uid="17" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformWeights.cs" />
-        <File uid="18" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Player.cs" />
-        <File uid="19" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Rocket.cs" />
-        <File uid="20" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ScoresMenuController.cs" />
-        <File uid="21" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Soundmanager.cs" />
-        <File uid="22" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreManager.cs" />
-        <File uid="23" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreMenuController.cs" />
-        <File uid="24" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Tile.cs" />
+        <File uid="5" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Ajust.cs" />
+        <File uid="6" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Enemy.cs" />
+        <File uid="7" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/FollowTarget.cs" />
+        <File uid="8" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/GameManager.cs" />
+        <File uid="9" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/KeyBindings.cs" />
+        <File uid="10" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardManager.cs" />
+        <File uid="11" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/LeaderboardRow.cs" />
+        <File uid="12" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/MonoSingleton.cs" />
+        <File uid="13" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Music manager.cs" />
+        <File uid="14" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ObjectPool.cs" />
+        <File uid="15" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/OptionsMenuController.cs" />
+        <File uid="16" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformSpawner.cs" />
+        <File uid="17" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/PlatformWeights.cs" />
+        <File uid="18" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Player.cs" />
+        <File uid="19" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Rocket.cs" />
+        <File uid="20" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/ScoresMenuController.cs" />
+        <File uid="21" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Soundmanager.cs" />
+        <File uid="22" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreManager.cs" />
+        <File uid="23" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/StoreMenuController.cs" />
+        <File uid="24" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Scripts/Tile.cs" />
       </Files>
       <Classes>
         <Class>
@@ -1042,9 +1042,9 @@
               <Name>Enemy::Enemy()</Name>
               <FileRef uid="6" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="379" ordinal="0" offset="0" sl="8" sc="0" el="8" ec="0" bec="0" bev="0" fileid="6" />
-                <SequencePoint vc="0" uspid="380" ordinal="0" offset="11" sl="9" sc="0" el="9" ec="0" bec="0" bev="0" fileid="6" />
-                <SequencePoint vc="0" uspid="381" ordinal="0" offset="22" sl="12" sc="0" el="12" ec="0" bec="0" bev="0" fileid="6" />
+                <SequencePoint vc="0" uspid="379" ordinal="0" offset="0" sl="8" sc="22" el="8" ec="22" bec="0" bev="0" fileid="6" />
+                <SequencePoint vc="0" uspid="380" ordinal="0" offset="11" sl="9" sc="22" el="9" ec="22" bec="0" bev="0" fileid="6" />
+                <SequencePoint vc="0" uspid="381" ordinal="0" offset="22" sl="12" sc="5" el="12" ec="5" bec="0" bev="0" fileid="6" />
               </SequencePoints>
               <BranchPoints />
             </Method>
@@ -3169,12 +3169,12 @@
               <Name>Rocket::Rocket()</Name>
               <FileRef uid="19" />
               <SequencePoints>
-                <SequencePoint vc="0" uspid="1447" ordinal="0" offset="0" sl="7" sc="0" el="7" ec="0" bec="0" bev="0" fileid="19" />
-                <SequencePoint vc="0" uspid="1448" ordinal="0" offset="11" sl="8" sc="0" el="8" ec="0" bec="0" bev="0" fileid="19" />
-                <SequencePoint vc="0" uspid="1449" ordinal="0" offset="22" sl="9" sc="0" el="9" ec="0" bec="0" bev="0" fileid="19" />
-                <SequencePoint vc="0" uspid="1450" ordinal="0" offset="33" sl="10" sc="0" el="10" ec="0" bec="0" bev="0" fileid="19" />
-                <SequencePoint vc="0" uspid="1451" ordinal="0" offset="59" sl="12" sc="0" el="12" ec="0" bec="0" bev="0" fileid="19" />
-                <SequencePoint vc="0" uspid="1452" ordinal="0" offset="66" sl="13" sc="0" el="13" ec="0" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1447" ordinal="0" offset="0" sl="7" sc="5" el="7" ec="5" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1448" ordinal="0" offset="11" sl="8" sc="5" el="8" ec="5" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1449" ordinal="0" offset="22" sl="9" sc="5" el="9" ec="5" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1450" ordinal="0" offset="33" sl="10" sc="5" el="10" ec="5" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1451" ordinal="0" offset="59" sl="12" sc="5" el="12" ec="5" bec="0" bev="0" fileid="19" />
+                <SequencePoint vc="0" uspid="1452" ordinal="0" offset="66" sl="13" sc="5" el="13" ec="5" bec="0" bev="0" fileid="19" />
               </SequencePoints>
               <BranchPoints />
             </Method>
@@ -4002,14 +4002,14 @@
       <ModuleTime>0001-01-01T00:00:00</ModuleTime>
       <ModuleName>PlayModeTests</ModuleName>
       <Files>
-        <File uid="25" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameManagerTests.cs" />
-        <File uid="26" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameOverTests.cs" />
-        <File uid="27" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameplayTests.cs" />
-        <File uid="28" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/MenuTests.cs" />
-        <File uid="29" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/PlatformInteractionTests.cs" />
-        <File uid="30" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/PlayerTests.cs" />
-        <File uid="31" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/ScoreAndTimerTests.cs" />
-        <File uid="32" fullPath="C:/Users/tobi_/OneDrive/Documents/Masters/SE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/SoundOptionsTests.cs" />
+        <File uid="25" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameManagerTests.cs" />
+        <File uid="26" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameOverTests.cs" />
+        <File uid="27" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/GameplayTests.cs" />
+        <File uid="28" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/MenuTests.cs" />
+        <File uid="29" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/PlatformInteractionTests.cs" />
+        <File uid="30" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/PlayerTests.cs" />
+        <File uid="31" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/ScoreAndTimerTests.cs" />
+        <File uid="32" fullPath="C:/Users/Shaan/OneDrive - The University of Nottingham/Year 3/COMP4024 - SWE Management/Group1-GameDev/EscapeSchool/Assets/Tests/PlayMode/SoundOptionsTests.cs" />
       </Files>
       <Classes>
         <Class>
